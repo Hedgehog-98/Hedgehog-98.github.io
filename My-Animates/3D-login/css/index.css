@@ -1,0 +1,93 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #1f2029;
+  perspective: 500px;
+}
+body .stage {
+  width: 440px;
+  height: 400px;
+  color: #fff;
+  background: url("https://www.17sucai.com/preview/1097306/2020-11-18/dlcc/images/pat.svg") center no-repeat;
+  background-color: #292b3a;
+  background-size: cover;
+  border-radius: 10px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: all 0.8s;
+}
+body .stage form {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 40px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+}
+body .stage form h2 {
+  align-self: center;
+  font-weight: 600;
+}
+body .stage form input {
+  width: 100%;
+  border: none;
+  outline: none;
+  margin: 10px 0;
+  line-height: 3;
+  text-indent: 1rem;
+  border-radius: 5px;
+  color: #ccc;
+  background-color: #1f2029;
+}
+body .stage form input[type="button"] {
+  width: 100px;
+  height: 44px;
+  margin: 24px auto 0;
+  padding: 0 30px;
+  text-indent: 0;
+  color: #102770;
+  transition: all 0.3s;
+  background-color: #ffeba7;
+  box-shadow: 1px 1px 5px #f3d97f;
+}
+body .stage form input[type="button"]:hover {
+  background-color: #f3d97f;
+  box-shadow: none;
+}
+body .stage form .info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  color: #666;
+}
+body .stage form .info span {
+  cursor: pointer;
+  font-size: 12px;
+}
+body .stage form .info span i:hover {
+  color: #ffeba7;
+}
+body .stage .login {
+  transform: translateZ(50px);
+}
+body .stage .register {
+  transform: translateZ(-10px) rotateY(180deg);
+}
+body .stage .register .info span {
+  margin: 0 auto;
+}
+body .stage.active {
+  transform: rotateY(180deg);
+}
+/*# sourceMappingURL=./index.css.map */

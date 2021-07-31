@@ -1,0 +1,116 @@
+// https://www.17sucai.com/preview/1097306/2020-11-18/dlcc/images/pat.svg
+// 背景颜色#2a2b38
+
+
+// body背景颜色 #1f2029
+body{
+    margin: 0;
+    padding: 0;
+    // 设置高度为视口高度
+    height: 100vh;
+    // 居中
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1f2029 ;
+    // 给body加透视效果
+    perspective: 500px;
+    .stage {
+        width: 440px;
+        height: 400px;
+        color: #fff;
+        background: url("https://www.17sucai.com/preview/1097306/2020-11-18/dlcc/images/pat.svg") center no-repeat;
+        background-color: #292b3a;
+       
+        // 覆盖
+        background-size: cover;
+        border-radius: 10px;
+        position: relative;
+        // 保留子元素的3d效果
+        transform-style: preserve-3d;
+
+        transition: all .8s;
+
+        form{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            padding: 0 40px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            flex-wrap: wrap;
+            box-sizing: border-box;
+            h2{
+                align-self: center;
+                font-weight: 600;
+            }
+            input{
+                width: 100%;
+                border: none;
+                outline: none;
+                margin: 10px 0;
+                line-height: 3;
+                text-indent: 1rem;
+                border-radius: 5px;
+                color: #ccc;
+                background-color: #1f2029;
+                &[type="button"]{
+                    width: 100px;
+                    height: 44px;
+                    margin: 24px auto 0;
+                    padding: 0 30px;
+                    text-indent: 0;
+                    color: #102770;
+                    transition: all .3s;
+                    background-color: #ffeba7;
+                    box-shadow: 1px 1px 5px  #f3d97f ;
+                    &:hover{
+                        // 变亮
+                        background-color: #f3d97f;
+                        box-shadow: none;
+                    }
+                }
+            }
+            // info
+            .info {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 20px;
+                color: #666;
+                span{
+                    cursor: pointer;
+                    font-size: 12px;
+                }
+            }
+            .info span i:hover{
+                color: #ffeba7;
+            }
+        }
+        // 翻转
+        .login{
+            // background-color: rgba(164, 218, 240, 0.842);
+            // background-color: skyblue;
+            transform: translateZ(50px);
+        }
+        .register{
+            // background-color: rgba(223, 105, 125, 0.623);
+            // background-color: pink;
+            transform: translateZ(-10px) rotateY(180deg);
+            .info{
+                span{
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
+    .stage.active{
+        transform: rotateY(180deg);
+        // transition: all 3s;
+    }
+    
+}

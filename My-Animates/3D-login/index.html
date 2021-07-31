@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <style>
+        /* https://c.runoob.com/codedemo/3391 */
+
+        /* https://www.17sucai.com/pins/demo-show?id=37742 */
+
+        /* https://www.17sucai.com/pins/37742.html */
+
+        /* https://www.17sucai.com/pins/demo-show?id=38504 */
+        /* https://www.17sucai.com/pins/demo-show?id=37377 */
+
+        /* https://www.17sucai.com/pins/demo-show?id=24265 */
+
+        /* https://www.17sucai.com/pins/demo-show?id=39022 5555555555 */
+
+
+        /* https://www.17sucai.com/pins/demo-show?id=7881 */
+
+
+        /* https://www.17sucai.com/pins/demo-show?id=15819 */
+
+        /* https://www.17sucai.com/pins/demo-show?id=13823 */
+
+        /* https://www.17sucai.com/pins/demo-show?id=1064 */
+
+        /* http://www.htmleaf.com/Demo/201507012142.html */
+
+        /* http://ianlunn.github.io/Hover/ */
+    </style>
+</head>
+
+<body>
+    <!-- stage舞台 -->
+    <section class="stage">
+        <form class="login">
+            <h2>登录</h2>
+            <input type="email" placeholder="请输入电子邮箱">
+            <input type="password" placeholder="请输入密码">
+            <input type="button" value="登录">
+            <div class="info">
+                <span>没有账号？<i>立即注册</i></span>
+                <span><i>忘记密码?</i></span>
+            </div>
+        </form>
+        <form class="register">
+            <h2>注册</h2>
+            <input type="text" placeholder="请输入用户名">
+            <input type="email" placeholder="请输入电子邮箱">
+            <input type="password" placeholder="请输入密码">
+            <input type="button" value="注册">
+            <div class="info">
+                <span>已有帐号？<i>立即登录</i></span>
+            </div>
+        </form>
+    </section>
+    <script>
+        var btns = document.querySelectorAll('.stage form .info span i');
+        btns[0].addEventListener('click', function () {
+            document.querySelector('.stage').classList.toggle('active');
+
+        })
+        btns[2].addEventListener('click', function () {
+            document.querySelector('.stage').classList.toggle('active');
+        })
+    </script>
+    <script>
+
+    </script>
+</body>
+
+</html>
