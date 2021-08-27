@@ -1,0 +1,32 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: rgba(135, 207, 235, 0.527);
+    .stage{
+        width: 500px;
+        height: 300px;
+        margin: 100px auto;
+        // border: 1px solid #f00;
+        ul.content {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0;
+            padding: 0;
+            width: 75px;
+            height: 125px;
+            // border: 1px solid red;
+    
+            li{
+                width: 25px;
+                height: 25px;
+                padding: 2px;
+                background-color: #fff;
+                // 改变背景颜色在起点
+                background-clip: content-box;
+                box-sizing: border-box;
+            }
+        }
+    }
+    
+}

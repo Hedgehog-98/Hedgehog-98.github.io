@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+        }
+
+        .outer-circle {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 342px;
+            height: 342px;
+            background-color: #df0024;
+            border-radius: 50%;
+        }
+
+        .outer-circle:hover {}
+
+        .inner-circle {
+            width: 214px;
+            height: 214px;
+            border: 13px solid #000;
+            border-radius: 50%;
+            box-sizing: border-box;
+        }
+
+        .inner-circle::after {
+            width: 58px;
+            height: 58px;
+
+        }
+
+        .mask {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            position: absolute;
+            top: 0;
+            /* left: 100%; */
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* background-color: rgba(0, 0, 255, 0.438); */
+            border-radius: 50%;
+        }
+
+        .mask::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 58px;
+            height: 58px;
+            margin-left: -29px;
+            margin-top: -29px;
+            border-radius: 50%;
+            /* background-color: red; */
+            background-color: #df0024;
+            z-index: 99;
+        }
+
+        .mask li {
+            position: absolute;
+            width: 214px;
+            height: 214px;
+            border-radius: 50%;
+            background-color: #000;
+            /* border-radius: 50%; */
+        }
+
+        .mask li:nth-child(1) {
+            top: 0px;
+            left: 0px;
+            background-color: #fff;
+        }
+
+        .mask li:nth-child(2) {}
+
+        .mask li:nth-child(3) {}
+    </style>
+</head>
+
+<body>
+    <div class="box">
+
+        <div class="outer-circle">
+            <ul class="mask">
+                <li class="item"></li>
+                <li class="item"></li>
+                <li class="item"></li>
+            </ul>
+            <div class="inner-circle">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

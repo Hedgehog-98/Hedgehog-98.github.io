@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            width: 400px;
+            height: 400px;
+            margin: 100px auto;
+        }
+
+        .outer-circle {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 342px;
+            height: 342px;
+            background-color: #df0024;
+            border-radius: 50%;
+            animation: rotate 5s linear infinite;
+        }
+
+        .outer-circle:hover {
+            animation-play-state: paused;
+        }
+
+        .inner-circle {
+            width: 214px;
+            height: 214px;
+            border: 13px solid #000;
+            border-radius: 50%;
+            box-sizing: border-box;
+        }
+
+        .inner-circle::after {
+            width: 58px;
+            height: 58px;
+
+        }
+
+        .mask {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            position: absolute;
+            top: 0;
+            /* left: 100%; */
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* background-color: rgba(0, 0, 255, 0.438); */
+            border-radius: 50%;
+        }
+
+        .mask::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 58px;
+            height: 58px;
+            margin-left: -29px;
+            margin-top: -29px;
+            border-radius: 50%;
+            /* background-color: red; */
+            background-color: #df0024;
+            z-index: 99;
+        }
+
+        .mask li {
+            position: absolute;
+            width: 214px;
+            height: 214px;
+            border-radius: 50%;
+            /* background-color: #000; */
+            /* border-radius: 50%; */
+
+        }
+
+        .mask li:nth-child(1) {
+            /* top: 0;
+            left: 50%;
+            transform: rotate(90deg) translateX(-50%);
+            background-color: rgba(255, 166, 0, 0.466);
+            box-shadow: 15px 15px 0 0 red inset; */
+            /* border-radius: 50% 0 50% 0; */
+
+            top: -84px;
+            left: 55%;
+            transform: rotate(315deg) translateX(-50%);
+            /* background-color: rgba(255, 166, 0, 0.466); */
+            box-shadow: 80px 32px 0px -30px inset;
+        }
+
+
+
+        .mask li:nth-child(2) {
+            /* top: 60%;
+            left: 10px;
+            transform: translateY(-50%);
+            background-color: rgba(255, 192, 203, 0.534);
+            z-index: 2;
+            box-shadow: 80px 32px 0px -30px inset; */
+
+
+            top: 45px;
+            left: -6px;
+            transform: rotate(228deg);
+            /* background-color: rgba(255, 192, 203, 0.534); */
+            z-index: 2;
+            box-shadow: 80px 32px 0px -30px inset;
+        }
+
+        .mask li:nth-child(3) {
+            /* top: 60%;
+            right: 10px;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.507);
+            z-index: 3;
+            box-shadow: 80px 32px 0px -30px inset; */
+            top: 124px;
+            right: 32px;
+            transform: rotate(108deg);
+            /* background-color: rgb(136 26 26 / 51%); */
+            z-index: 3;
+            box-shadow: 80px 32px 0px -30px inset;
+        }
+
+        @keyframes rotate {
+
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+
+        <div class="outer-circle">
+            <ul class="mask">
+                <li class="item"></li>
+                <li class="item"></li>
+                <li class="item"></li>
+            </ul>
+            <div class="inner-circle">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

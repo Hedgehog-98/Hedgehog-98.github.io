@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 500px;
+            height: 300px;
+            margin: 100px auto;
+            border: 1px solid #ccc;
+            background: linear-gradient(45deg, pink, skyblue);
+        }
+
+        .square {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            /* border: 1px solid #ccc; */
+            /* 旋转45度 */
+            transform: rotate(45deg);
+            background-color: hotpink;
+
+        }
+
+        .square::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 50%;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: hotpink;
+            /* background-color: rgba(39, 128, 39, 0.486); */
+
+        }
+
+        .square::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: hotpink;
+            /* background-color: rgba(173, 216, 230, 0.507); */
+        }
+
+        .square {
+            animation: squareScale .8s linear infinite;
+        }
+
+        /* .square::before,
+        .square::after {
+            animation: scale .5s linear 4s infinite;
+        } */
+
+        @keyframes squareScale {
+
+            /* from {
+                transform: rotate(45deg) scale(1);
+            }
+
+            to {
+
+                transform: rotate(45deg) scale(1.2);
+            } */
+            0% {
+                transform: rotate(45deg) scale(0.8);
+            }
+
+            25% {
+                transform: rotate(45deg) scale(1);
+            }
+
+            50% {
+                transform: rotate(45deg) scale(1.2);
+            }
+
+            75% {
+                transform: rotate(45deg) scale(1);
+            }
+
+            100% {
+                transform: rotate(45deg) scale(0.8);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <div class="
+        square">
+
+        </div>
+    </div>
+</body>
+
+</html>

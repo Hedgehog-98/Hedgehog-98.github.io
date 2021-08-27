@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./main.js"></script>
+</head>
+
+<body>
+    <div class="stage">
+        <!-- 内容 -->
+        <!-- <ul class="content">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul> -->
+    </div>
+    <script>
+        /* // 获取数组
+        console.log(matrix); */
+
+        // 封装一个num构造函数
+        function Num(x) {
+            this.num = x;
+        }
+
+
+        // 根据数值获取坐标
+        Num.prototype.calcCoor = function () {
+            return matrix[this.num];
+        }
+        //生成小白块的方法
+        Num.prototype.createDot = function () {
+            //获取矩阵
+            this.coor = this.calcCoor();
+            // 创建ul.content
+            var content = document.createElement('ul');
+            content.classList.add('.content');
+
+            // 遍历数组
+            this.coor.forEach(function (row, rowIndex) { //二维数组的行
+
+                row.forEach(function (col, colIndex) { // 二维数组的列
+                    console.log(row, col);
+
+                })
+            });
+
+        }
+
+        // 根据当前数值更新坐标并更新所有dot的class
+        Num.prototype.update = function (n) {
+
+        }
+
+        // 新建一个Num实例
+        // console.log(new Num(2));
+        var num1 = new Num(2);
+        console.log(num1.calcCoor()); //2
+        num1.calcCoor();
+    </script>
+</body>
+
+</html>
