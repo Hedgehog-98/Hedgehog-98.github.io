@@ -108,4 +108,7 @@ export default {
   flex-wrap: wrap;
   // justify-content: space-evenly;
 }
+// .home-new-song-list{
+//   padding: 0 5px;
+// }
 </style>

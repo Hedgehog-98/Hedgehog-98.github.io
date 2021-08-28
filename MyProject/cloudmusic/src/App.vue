@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" >
     <Header v-if="$route.meta.isShowNavBar"></Header>
     <ul id="nav" v-if="$route.meta.isShowNavBar">
       <li><router-link to="/">推荐音乐</router-link></li>
@@ -24,15 +24,15 @@
     <section class="routes-trasition">
       <transition
         name="custom-classes-transition"
-        enter-active-class="animate__animated animate__slideInRight"
-        leave-active-class="animate__animated animate__slideOutLeft"
+        enter-active-class="animate__animated animate__zoomIn"
+        leave-active-class="animate__animated animate__fadeOut"
       >
         <router-view 
           @change-current-song="changeCurrentSong"
           @change-current-play-list="changeCurrentPlayList"
           :currentSongId="currentSong ? currentSong.id : null"
           :playing="playing"
-          style="position:absolute;top: 0; left: 0; width:100%; height:100%;"
+          style="position:absolute;top: 0; left: 0; width:100%; height:100%;overflow-y:auto;"
         />
       </transition>
     </section>
@@ -40,7 +40,7 @@
     <audio
       :src="currentSongUrl"
       controls="controls"
-      style=" margin-bottom: 50px"
+      style="margin-bottom: 50px"
       autoplay
       ref="audio"
       @playing="playing = true"
@@ -125,7 +125,6 @@ export default {
 #app{
   width: 100vw;
   height: 100vh;
-  
 }
 #nav {
   display: flex;
@@ -156,7 +155,6 @@ export default {
   position: relative;
   top: 0;
   left: 0;
-  height:calc(100vh - 84px - 40px);
-  
+  height:calc(100vh - 84px - 40px );
 }
 </style>

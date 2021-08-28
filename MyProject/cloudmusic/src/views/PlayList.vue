@@ -91,6 +91,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+// .play-list {
+//   // padding: 0 10px;
+// }
 // 列表内容标题
 h3.title {
   height: 23px;
