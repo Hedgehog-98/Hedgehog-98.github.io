@@ -136,7 +136,7 @@ export default {
             console.log(res);
             // this.searchResults = res.data.result.songs;
             // 把audio 隐藏掉
-            // document.querySelector("audio").style.display = "none";
+            document.querySelector("audio").style.display = "none";
             this.searchResults.push(...res.data.result.songs);
             this.page++;
             this.hasMore = res.data.result.hasMore;
@@ -154,9 +154,9 @@ export default {
       if (this.hasMore) {
         if (
           Math.ceil(event.target.offsetHeight + event.target.scrollTop) >=
-          event.target.scrollHeight - 1
+          event.target.scrollHeight -1
         ) {
-          // console.log(Math.ceil(event.target.offsetHeight + event.target.scrollTop),event.target.scrollHeight);
+          console.log(Math.ceil(event.target.offsetHeight + event.target.scrollTop),event.target.scrollHeight);
           console.log("触底了");
           this.getSearchResultsData();
         } else {
@@ -210,6 +210,7 @@ export default {
 
 <style lang="less" scoped>
 #search {
+  padding-top: 120px;
   .serachIptBox {
     padding: 15px 10px;
     box-shadow: 0 1px 3px 0 rgba(150, 150, 150, 0.3);

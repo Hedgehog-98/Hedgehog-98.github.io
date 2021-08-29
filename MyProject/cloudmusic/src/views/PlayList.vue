@@ -93,9 +93,11 @@ export default {
 <style lang="less" scoped>
 // .play-list {
 //   // padding: 0 10px;
+//   // top:120px;
 // }
 // 列表内容标题
 h3.title {
+  // margin-top: 120px;
   height: 23px;
   line-height: 23px;
   text-align-last: left;

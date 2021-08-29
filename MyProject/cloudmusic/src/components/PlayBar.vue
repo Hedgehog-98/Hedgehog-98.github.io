@@ -40,8 +40,8 @@
     </div>
     <button class="list-btn">列表</button>
   </div> -->
-  <div class="play-bar">
-    <section class="bar" :class="{ playing: playing }" @click="showPlayPage = true">
+  <!-- <div class="play-bar"> -->
+    <section class="bar" :class="{ playing: playing }" @click="$emit('toggle-show-play-page',true)">
       <img
         :src="`${
           currentSong.song ? currentSong.picUrl : currentSong.al.picUrl
@@ -60,48 +60,13 @@
         <canvas height="40" width="40" ref="canvas"></canvas>
         <div class="icon" :class="[playing ? 'pause' : 'play']"></div>
       </div>
-      <button class="list-btn" @click.stop="showPlayList = true">列表</button>
+      <button class="list-btn" @click.stop="$emit('toggle-show-play-list',true)">列表</button>
     </section>
-    <section class="play-list" v-if="showPlayList">
-      <!-- 遮罩 淡入-->
-      <div
-        class="mask animate__animated animate__fadeIn"
-        @click.stop="showPlayList = false"
-      ></div>
-      <!-- 播放列表轮播卡片 及animate上滑动画 -->
-      <div class="swiper">
-        <div class="card animate__animated animate__slideInUp">
-          <ul class="list">
-            <NewSongItem
-              v-for="(item, index) in currentPlayList"
-              :key="item.id"
-              :item="item"
-              :currentSongId="currentSong.id"
-              :playing="playing"
-              @change-current-song="$emit('change-current-song', $event)"
-              :class="{ lt3: index < 3 }"
-            >
-              <span>{{ (index + 1).toString().padStart(2, "0") }}</span>
-            </NewSongItem>
-          </ul>
-        </div>
-      </div>
-    </section>
-    <transition
-        name="custom-classes-transition"
-        enter-active-class="animate__animated animate__zoomIn"
-        leave-active-class="animate__animated animate__fadeOut"
-      >
-    <!-- 播放页面 -->
-    <section class="play-page" v-if="showPlayPage">
-      <button @click="showPlayPage = false">play-page</button>
-    </section>
-    </transition>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
-import NewSongItem from "@/components/NewSongItem.vue";
+
 export default {
   name: "PlayBar",
   props: {
@@ -110,18 +75,6 @@ export default {
     currentTime: Number,
     durationTime: Number,
     currentPlayList: Array,
-    currentSongId: {
-      type: Number,
-    },
-  },
-  components: {
-    NewSongItem,
-  },
-  data() {
-    return {
-      showPlayList: false,
-      showPlayPage: false,
-    };
   },
   computed: {
     // 计算进度条百分比
@@ -179,7 +132,7 @@ export default {
     transform: rotate(360deg);
   }
 }
-.play-bar {
+// .play-bar {
   .bar {
     position: relative;
     display: flex;
@@ -283,69 +236,7 @@ export default {
       }
     }
   }
-  .play-list {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    .mask {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background-color: rgba(0, 0, 0, 0.5);
-    }
-    .swiper {
-      width: 100%;
-      height: 60vh;
-      position: absolute;
-      left: 0;
-      bottom: 10px;
-      padding: 0 10px;
-      .card {
-        // background-color: rgba(255, 0 ,0 ,.5);
-        background-color: #fefeff;
-        width: 100%;
-        height: 100%;
-        padding: 15px 10px 15px 0;
-        border-radius: 15px;
-        ul.list {
-          height: 100%;
-          overflow: auto;
-          // 滚动条宽高和背景 宽高是横竖滚动条的尺寸
-          &::-webkit-scrollbar {
-            width: 5px;
-            height: 15px;
-            background-color: #ccc;
-          }
-          // 滚动条轨道，内阴影和圆角
-          &::-webkit-scrollbar-track {
-            border-radius: 3px;
-            // -webkit-box-shadow:inset 0 0  0 3px  rgb(14, 14, 197);
-            // background-color: skyblue;
-            background: linear-gradient(pink, skyblue, lightgreen);
-          }
-          // 定义滑块 内阴影和圆角
-          &::-webkit-scrollbar-thumb {
-            border-radius: 2px;
-            // -webkit-box-shadow:inset 0 0  0 3px  rgb(14, 197, 54);
-            // background-color: pink;
-            // background: linear-gradient(pink,skyblue);
-            background-color: tomato;
-          }
-        }
-      }
-    }
-  }
-  .play-page {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    background-color: rgba(255, 0, 0, 0.5);
-  }
-}
+  
+ 
+// }
 </style>

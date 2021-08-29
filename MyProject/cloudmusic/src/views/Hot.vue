@@ -20,6 +20,7 @@ export default {
 
 <style lang="less" scoped>
 #hot {
+  top: 120px;
   .hot-bg {
     position: relative;
     display: flex;

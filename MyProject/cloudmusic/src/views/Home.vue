@@ -1,7 +1,6 @@
 <template>
   <div class="home" >
-    
-    <HomeTitle>编辑推荐</HomeTitle>
+    <HomeTitle class="home-title">编辑推荐</HomeTitle>
     <ul class="home-card-list">
       <CartItem v-for="item in personalize" :key="item.id"
         :item="item"
@@ -103,7 +102,10 @@ export default {
 // .home{
 //   // height: 1500px;
 // }
-.home-card-list {
+.home{
+  padding-top: 120px;
+}
+.home-card-list {  
   display: flex;
   flex-wrap: wrap;
   // justify-content: space-evenly;

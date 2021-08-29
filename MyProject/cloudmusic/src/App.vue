@@ -1,6 +1,6 @@
 <template>
-  <div id="app" >
-    <Header v-if="$route.meta.isShowNavBar"></Header>
+  <div id="app">
+    <Header v-if="$route.meta.isShowNavBar" class="header"></Header>
     <ul id="nav" v-if="$route.meta.isShowNavBar">
       <li><router-link to="/">推荐音乐</router-link></li>
       <li><router-link to="/hot">热歌榜</router-link></li>
@@ -27,12 +27,12 @@
         enter-active-class="animate__animated animate__zoomIn"
         leave-active-class="animate__animated animate__fadeOut"
       >
-        <router-view 
+        <router-view
           @change-current-song="changeCurrentSong"
           @change-current-play-list="changeCurrentPlayList"
           :currentSongId="currentSong ? currentSong.id : null"
           :playing="playing"
-          style="position:absolute;top: 0; left: 0; width:100%; height:100%;overflow-y:auto;"
+          class="router-view"
         />
       </transition>
     </section>
@@ -49,7 +49,7 @@
       @durationchange="durationChange"
     ></audio>
 
-    <PlayBar
+    <Play
       v-if="currentSong"
       :currentSong="currentSong"
       :currentPlayList="currentPlayList"
@@ -58,12 +58,12 @@
       :currentTime="currentTime"
       :durationTime="durationTime"
       @change-current-song="changeCurrentSong"
-    ></PlayBar>
+    ></Play>
   </div>
 </template>
 <script>
 import Header from "@/components/Header.vue";
-import PlayBar from "@/components/PlayBar.vue";
+import Play from "@/components/Play.vue";
 export default {
   data() {
     return {
@@ -76,7 +76,7 @@ export default {
   },
   components: {
     Header,
-    PlayBar,
+    Play,
   },
   computed: {
     currentSongUrl() {
@@ -122,17 +122,43 @@ export default {
 </script>
 
 <style lang="less">
-#app{
-  width: 100vw;
-  height: 100vh;
+* {
+  box-sizing: border-box;
+}
+.router-view {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+// #app{
+//   width: 100vw;
+//   height: 100vh;
+// }
+.header {
+  position: fixed;
+  top: 0px;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  height: 80px;
 }
 #nav {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  z-index: 999;
+  width: 100%;
+  // margin-top: 80px;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   text-align: center;
   height: 40px;
   // border-bottom: 1px solid #ccc;
+  background-color: #fff;
   box-shadow: 0 -1px 1px 0px rgba(200, 200, 200, 0.5) inset;
   li {
     // background-color: pink;
@@ -155,6 +181,7 @@ export default {
   position: relative;
   top: 0;
   left: 0;
-  height:calc(100vh - 84px - 40px );
+  // height: calc(100vh - 84px - 40px);
+  height: 100vh;
 }
 </style>
