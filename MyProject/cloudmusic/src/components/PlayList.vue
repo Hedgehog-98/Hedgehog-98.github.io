@@ -52,7 +52,7 @@ export default {
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 1999;
     height: 100vh;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.5);
@@ -63,7 +63,7 @@ export default {
     position: absolute;
     left: 0;
     bottom: 10px;
-    z-index: 999;
+    z-index: 1999;
     padding: 0 10px;
     .card {
       // background-color: rgba(255, 0 ,0 ,.5);

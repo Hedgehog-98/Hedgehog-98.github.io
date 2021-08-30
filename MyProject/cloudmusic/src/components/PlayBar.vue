@@ -41,7 +41,7 @@
     <button class="list-btn">列表</button>
   </div> -->
   <!-- <div class="play-bar"> -->
-    <section class="bar" :class="{ playing: playing }" @click="$emit('toggle-show-play-page',true)">
+    <section class="bar" :class="{ playing: playing }"  @click="$emit('toggle-show-play-page',true)">
       <img
         :src="`${
           currentSong.song ? currentSong.picUrl : currentSong.al.picUrl

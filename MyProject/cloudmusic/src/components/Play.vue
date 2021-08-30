@@ -1,15 +1,23 @@
 <template>
-  <div class="play-bar">
-    <PlayBar
-      :currentPlayList="currentPlayList"
-      :currentSong="currentSong"
-      :currentTime="currentTime"
-      :durationTime="durationTime"
-      :playing="playing"
-      @toggle-play-state="$emit('toggle-play-state')"
-      @toggle-show-play-list="showPlayList = $event"
-      @toggle-show-play-page="showPlayPage = $event"
-    />
+  <div class="play">
+    <transition
+      name="custom-classes-transition"
+      enter-active-class="animate__animated animate__fadeIn"
+      leave-active-class="animate__animated animate__fadeOut"
+    >
+      <PlayBar
+        class="play-bar"
+        v-show="!showPlayPage"
+        :currentPlayList="currentPlayList"
+        :currentSong="currentSong"
+        :currentTime="currentTime"
+        :durationTime="durationTime"
+        :playing="playing"
+        @toggle-play-state="$emit('toggle-play-state')"
+        @toggle-show-play-list="showPlayList = $event"
+        @toggle-show-play-page="showPlayPage = $event"
+      />
+    </transition>
     <PlayList
       v-if="showPlayList"
       @change-current-song="$emit('change-current-song', $event)"
@@ -20,11 +28,26 @@
     />
     <transition
       name="custom-classes-transition"
-      enter-active-class="animate__animated animate__zoomIn"
+      enter-active-class="animate__animated animate__fadeIn"
       leave-active-class="animate__animated animate__fadeOut"
     >
       <!-- 播放页面 -->
-      <PlayPage v-if="showPlayPage" @toggle-show-play-page="showPlayPage = $event"/>
+      <PlayPage
+        v-show="showPlayPage"
+        @toggle-show-play-page="showPlayPage = $event"
+        @toggle-play-state="$emit('toggle-play-state')"
+        @toggle-show-play-list="showPlayList = $event"
+        @prev-song="$emit('prev-song')"
+        @next-song="$emit('next-song')"
+        @toggle-play-mode="$emit('toggle-play-mode')"
+        :currentSong="currentSong"
+        :currentTime="currentTime"
+        :durationTime="durationTime"
+        :currentPlayList="currentPlayList"
+        :playing="playing"
+        class="play-page"
+         
+      />
     </transition>
   </div>
 </template>
@@ -57,4 +80,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
 </style>>

@@ -58,6 +58,9 @@
       :currentTime="currentTime"
       :durationTime="durationTime"
       @change-current-song="changeCurrentSong"
+      @prev-song="prevSong"
+      @next-song="nextSong"
+      @toggle-play-mode="togglePlayMode"
     ></Play>
   </div>
 </template>
@@ -106,6 +109,37 @@ export default {
         this.$refs.audio.play();
       }
     },
+    // 上一首
+    prevSong() {
+      this.currentPlayList.findIndex((item) => {
+        // console.log("上");
+        var index = this.currentPlayList.findIndex((item) => {
+          return item.id === this.currentSong.id;
+        });
+        // console.log(index);
+        index--;
+        // 判断边界
+        index = index <= 0 ? this.currentPlayList.length - 1 : index;
+        // console.log(index);
+        this.changeCurrentSong(this.currentPlayList[index]);
+      });
+    },
+    // 下一首
+    nextSong() {
+      // console.log("下一首");
+      var index = this.currentPlayList.findIndex((item) => {
+        return this.currentSong.id === item.id;
+      });
+      // console.log(index);
+      index++;
+      // 判断边界
+      index = index >= this.currentPlayList.length - 1 ? 0 : index;
+      // console.log(index);
+      this.changeCurrentSong(this.currentPlayList[index]);
+    },
+    // 播放模式
+    togglePlayMode() {},
+
     // audio音频事件
     timeUpdate(event) {
       // 获取音频当前时间
@@ -121,7 +155,7 @@ export default {
 };
 </script>
 
-<style lang="less">
+<style lang="less" scope>
 * {
   box-sizing: border-box;
 }
@@ -181,7 +215,7 @@ export default {
   position: relative;
   top: 0;
   left: 0;
-  // height: calc(100vh - 84px - 40px);
-  height: 100vh;
+  height: calc(100vh - 60px);
+  // height: 100vh;
 }
 </style>

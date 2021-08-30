@@ -89,7 +89,7 @@ export default {
       inputing: false,
       page: 0,
       hasMore: false,
-      history:JSON.parse(window.localStorage.getItem('history')) || [],
+      history: JSON.parse(window.localStorage.getItem("history")) || [],
     };
   },
   created() {
@@ -136,14 +136,21 @@ export default {
             console.log(res);
             // this.searchResults = res.data.result.songs;
             // 把audio 隐藏掉
-            document.querySelector("audio").style.display = "none";
-            this.searchResults.push(...res.data.result.songs);
-            this.page++;
-            this.hasMore = res.data.result.hasMore;
+            // document.querySelector("audio").style.display = "none";
+            // if (res.data.result.songs) {
+              this.searchResults.push(...res.data.result.songs);
+              this.page++;
+              this.hasMore = res.data.result.hasMore;
 
-            // 记录历史搜索记录
-            this.history = [...new Set([...this.history,this.value])];
-            window.localStorage.setItem('history',JSON.stringify(this.history));
+              // 记录历史搜索记录
+              this.history = [...new Set([...this.history, this.value])];
+              window.localStorage.setItem(
+                "history",
+                JSON.stringify(this.history)
+              );
+            // } else {
+            //   return;
+            // }
           },
           (err) => console.log(err)
         );
@@ -154,9 +161,12 @@ export default {
       if (this.hasMore) {
         if (
           Math.ceil(event.target.offsetHeight + event.target.scrollTop) >=
-          event.target.scrollHeight -1
+          event.target.scrollHeight - 1
         ) {
-          console.log(Math.ceil(event.target.offsetHeight + event.target.scrollTop),event.target.scrollHeight);
+          console.log(
+            Math.ceil(event.target.offsetHeight + event.target.scrollTop),
+            event.target.scrollHeight
+          );
           console.log("触底了");
           this.getSearchResultsData();
         } else {
@@ -202,6 +212,7 @@ export default {
         this.getSearchResultsData();
       } else {
         this.searchResults = [];
+        this.page = 0;
       }
     },
   },
@@ -327,7 +338,7 @@ export default {
           color: #d43c33;
           font-size: 24px;
         }
-        .up{
+        .up {
           position: fixed;
           bottom: 10px;
           right: 20px;
@@ -338,7 +349,7 @@ export default {
           text-align: center;
           line-height: 25px;
           background-color: skyblue;
-          border-radius: 25px 25px 0 0 ;
+          border-radius: 25px 25px 0 0;
         }
       }
     }
