@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <audio controls src="https://music.163.com/song/media/outer/url?id=1871993457.mp3"></audio>
+
+  <div class="box">
+    <ul></ul>
+  </div>
+  <style>
+    .box {
+      width: 100%;
+      height: 400px;
+      /* padding: 20px; */
+      background: lightblue;
+      overflow: hidden;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      transition: all 0.3s;
+      transform: translateY(200px);
+    }
+
+    ul li {
+      line-height: 25px;
+    }
+
+    /* @keyframes xxx {
+        from {
+          background-image: linear-gradient(to right, red 0%, blue 0%);
+        }
+        to {
+          background-image: linear-gradient(to right, red 100%, blue 100%);
+        }
+      } */
+
+    @keyframes xxx {
+      from {
+        background-position-x: 0;
+      }
+
+      to {
+        background-position-x: -100%;
+      }
+    }
+
+    .active {
+      /* cursor: pointer; */
+      animation-name: xxx;
+      animation-timing-function: linear;
+      animation-duration: 3s;
+      background-image: linear-gradient(to right, red 50%, blue 50%);
+      background-size: 200%;
+      /* -webkit-background-clip: text; */
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+  <script>
+    var lyric =
+      "[00:00.000] 作词 : 李荣浩\n[00:01.000] 作曲 : 李荣浩\n[00:02.000] 编曲 : 李荣浩\n[00:03.000] 制作人 : 李荣浩\n[00:19.140]日落照在脸上热热的\n[00:26.830]这周末去哪儿玩呢\n[00:32.920]靠在我肩膀你自言自语\n[00:37.610]把袖口衣角卷起\n[00:41.250]夏天要过去\n[00:48.980]听说午夜会有流星雨\n[00:56.700]买好多吃的东西\n[01:03.409]拿给我看你抄写的歌词\n[01:08.400]小时候胖的样子\n[01:11.930]关于你的事\n[01:18.980]我们好好的\n[01:22.489]我们好好的\n[01:26.439]当初你给我第一个拥抱\n[01:31.040]你害羞着撒娇\n[01:34.180]我们好好的\n[01:37.930]偶尔是会有些小小分争\n[01:42.680]你留的灯\n[01:44.700]旁边饭盒上这样写着\n[01:49.379]我们好好的\n[02:05.290]天气预报午后还有雨\n[02:13.280]送雨伞楼下等你\n[02:19.530]你说没干透的衣服别穿\n[02:24.599]喝水速度要再慢\n[02:27.970]嘘寒过问暖\n[02:35.099]我们好好的\n[02:38.800]我们好好的\n[02:42.590]当初你给我第一个拥抱\n[02:47.250]你害羞着撒娇\n[02:50.259]我们好好的\n[02:54.050]偶尔是会有些小小分争\n[02:58.870]你留的灯\n[03:00.810]旁边饭盒上这样写着\n[03:05.490]我们好好的\n[03:20.870]我们好好的\n[03:24.409]我们好好的\n[03:28.349]当初给彼此那一些承诺\n[03:32.930]完成的差不多\n[03:35.970]我们好好的\n[03:39.800]偶尔是会有些小小分争\n[03:44.430]你留的灯\n[03:46.379]旁边饭盒上这样写着\n[03:51.129]我们好好的\n[03:56.069]你留的灯\n[03:57.970]旁边饭盒上这样写着\n[04:04.870]我们好好的\n[04:06.963] 吉他 : 李荣浩\n[04:09.056] 贝斯 : 李荣浩\n[04:11.149] 和音 : 李荣浩\n[04:13.242] 弦乐编写 : 李荣浩\n[04:15.335] 弦乐 : 国际首席爱乐乐团\n[04:17.428] 录音师 : 李荣浩\n[04:19.521] 混音师 : 李荣浩\n[04:21.614] 音乐制作助理 : 青格乐\n[04:23.707] 录音工作室 : 北京一样音乐录音室\n[04:25.800] 混音室 : 北京一样音乐录音室\n[04:27.893] 母带制作 : 李荣浩\n[04:29.986] 母带工程师 : 周天澈\n[04:32.079] 母带后期处理录音室 : Studio 21A\n";
+
+    var arr = lyric
+      .split("\n")
+      .filter((s) => s)
+      .map((s) => {
+        var text = s.replace(/^\[\d{0,2}:\d{0,2}\.\d{0,3}\]/gi, "");
+        var timeStr = s.replace(text, "").replace(/(^\[|\]$)/g, "");
+        var timeArr = timeStr.split(":").map((item) => Number(item));
+        var time = timeArr[0] * 60 + timeArr[1];
+        return {
+          text,
+          time
+        };
+      });
+
+    console.log(arr);
+    // arr.forEach((item) => {
+    //   var node = document.createElement("li");
+    //   var span = document.createElement("span");
+    //   span.innerText = item.text;
+    //   node.appendChild(span);
+    //   document.querySelector(".box ul").appendChild(node);
+    // });
+
+    // document.querySelector("audio").ontimeupdate = function () {
+    //   // console.log(document.querySelector("audio").currentTime);
+    //   var t = document.querySelector("audio").currentTime;
+
+    //   var i = arr.findIndex((item) => item.time > t);
+    //   var currentLyricIndex = i !== -1 ? i - 1 : arr.length - 1;
+    //   console.log(arr[currentLyricIndex].text);
+
+    //   // document.querySelector(".box ul").style.marginTop =
+    //   //   -currentLyricIndex * 25 + "px";
+    //   var aa = [...document.querySelectorAll(".box ul li")]
+    //     .slice(0, currentLyricIndex)
+    //     .reduce(function (total, item) {
+    //       return total + item.offsetHeight;
+    //     }, 0);
+    //   // console.log(aa);
+    //   document.querySelector(".box ul").style.marginTop = -aa + "px";
+
+    //   document.querySelectorAll(".box ul li").forEach((item, index) => {
+    //     if (index === currentLyricIndex) {
+    //       // item.style.color = "red";
+    //       item.querySelector("span").classList.add("active");
+
+    //       // 计算时间差
+    //       var t =
+    //         arr[currentLyricIndex + 1].time - arr[currentLyricIndex].time;
+
+    //       // animationDuration
+    //       item.querySelector("span").style.animationDuration = t - 0.5 + "s";
+    //     } else {
+    //       // item.style.color = "black";
+    //       item.querySelector("span").classList.remove("active");
+    //     }
+    //   });
+    // };
+
+    //   var str = "[00:19.140]日落照在脸上热热的";
+    //   var x = str.replace(/^\[\d{2}:\d{2}\.\d{3}\]/gi, "");
+    //   var y = str.replace(x, "");
+    //   console.log(x, y);
+  </script>
+</body>
+
+</html>

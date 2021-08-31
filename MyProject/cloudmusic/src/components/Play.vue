@@ -40,6 +40,7 @@
         @prev-song="$emit('prev-song')"
         @next-song="$emit('next-song')"
         @toggle-play-mode="$emit('toggle-play-mode')"
+        @change-current-song="$emit('change-current-song', $event)"
         :currentSong="currentSong"
         :currentTime="currentTime"
         :durationTime="durationTime"

@@ -73,7 +73,7 @@ export default {
     getNewSongData(){
       this.axios.get("http://apis.netstart.cn/music/personalized/newsong").then(
         (res) => {
-          console.log(res);
+          // console.log(res);
           this.songs = res.data.result;
         },
         (err) => {
@@ -104,6 +104,7 @@ export default {
 // }
 .home{
   padding-top: 120px;
+  height: 120%;
 }
 .home-card-list {  
   display: flex;

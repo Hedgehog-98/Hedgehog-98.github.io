@@ -1,5 +1,16 @@
 <template>
-  <div class="play-lyric" @click="$emit('toggle-show-play-lyric', false)"></div>
+  <div class="play-lyric" @click="$emit('toggle-show-play-lyric', false)">
+    <div class="box" ref="box">
+      <ul class="wrapper" ref="wrapper">
+        <li v-for="(item, index) in lyric" :key="index" ref="li" class="li">
+          <span class="text" :class="{ active: currentLyricIndex === index }">{{
+            item.text
+          }}</span>
+          <!-- <span>{{currentLyricIndex}}{{index}}</span> -->
+        </li>
+      </ul>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -7,56 +18,81 @@ export default {
   name: "Lyric",
   props: {
     currentSong: Object,
+    playing: Boolean,
+    currentTime: Number,
+    durationTime: Number,
+    currentPlayList: Array,
+    lyric:Array,
   },
-  data() {
-    return {
-      lyric: [],
-    };
-  },
-  created() {
-    // 获取歌词
-    this.getLyricData();
+  // data() {
+  //   return {
+  //     lyric: [],
+  //   };
+  // },
+  
+  computed: {
+    // 查找当前的播放的下标
+    currentLyricIndex() {
+      var i = this.lyric.findIndex((item) => item.time > this.currentTime);
+      var currentLyricIndex = i !== -1 ? i - 1 : this.lyric.length - 1;
+      // console.log(this.lyric[currentLyricIndex].text);
+      // return this.lyric[currentLyricIndex].text;
+      return currentLyricIndex;
+    },
+
+    // 计算滚动的距离
+    ulMarginTop() {
+      var mt = [...document.querySelectorAll("ul .li")]
+        .slice(0, this.currentLyricIndex)
+        .reduce((total, item) => {
+          return total + item.offsetHeight;
+        }, 0);
+      // console.log(mt);
+      return mt;
+    },
   },
   methods: {
-    getLyricData() {
-      this.axios.get("http://apis.netstart.cn/music/lyric?id=1872975622").then(
-        (res) => {
-          console.log(res);
-          var lyric = res.data.lrc.lyric;
-          // console.log(lyric);
-          var arr = lyric
-            .split("\n")
-            .filter((s) => s)
-            .map((s) => {
-              var text = s.replace(/^\[\d{2}:\d{2}\.\d{3}\]/i, "");
-              var timeStr = s.replace(text, "").replace(/(^\[|\]$)/g, "");
-              var timeArr = timeStr.split(":").join("-").split(".").join("-");
-              // console.log(timeArr);
-              //   var time = timeArr[0] * 60 + timeArr[1];
-              //   return { text, time };
-              return timeArr;
-            });
-          console.log(arr);
-          var arr1 = arr.filter((item) => item != "");
-          console.log(arr1);
-          var arr2 = [];
-          arr1.forEach((item) => {
-            console.log(item.split("-"));
-            // return item.split('-');
-            // console.log(item.split('-')[0],item.split('-')[1],item.split('-')[2]);
-            var m = Number(item.split("-")[0]);
-            var s = Number(item.split("-")[1]);
-            var ms = Number(item.split("-")[2]);
-            var time = m * 60 * 1000 + s * 1000 + ms;
-            console.log(m, s, ms);
-            console.log(time);
-            arr2.push(time);
-          });
-          console.log(arr1);
-          console.log(arr2);
-        },
-        (err) => console.log(err)
-      );
+    // getLyricData() {
+    //   this.axios.get("http://apis.netstart.cn/music/lyric?id=1873049720").then(
+    //   // this.axios
+    //   //   .get("http://apis.netstart.cn/music/lyric", {
+    //   //     params: {
+    //   //       id,
+    //   //     },
+    //   //   })
+    //   //   .then(
+    //       (res) => {
+    //         console.log(res);
+    //         var lyric = res.data.lrc.lyric;
+    //         // console.log(lyric);
+    //         var arr = lyric
+    //           .split("\n")
+    //           .filter((s) => s)
+    //           .map((s) => {
+    //             var text = s.replace(/^\[\d{2}:\d{2}\.\d+\]/i, "");
+    //             var timeStr = s.replace(text, "").replace(/(^\[|\]$)/gi, "");
+    //             // console.log(timeStr);
+    //             var timeArr = timeStr.split(":").map((item) => Number(item));
+    //             var time = timeArr[0] * 60 + timeArr[1];
+    //             return { text, time };
+    //           });
+    //         // console.log(arr);
+    //         this.lyric = arr;
+    //       },
+    //       (err) => console.log(err)
+    //     );
+    // },
+  },
+  watch: {
+    currentTime() {
+      // console.log(this.$refs.wrapper);
+      if (this.lyric) {
+          this.$refs.wrapper.style.top = -this.ulMarginTop + "px";
+      }
+
+      // this.$refs.box.scrollTop = this.ulMarginTop ;
+      // console.log(this.$refs.box.scrollTop,this.$refs.box.scrollHeight,this.$refs.box.offsetHeight);
+      // console.log(this.$refs.wrapper.scrollTop,this.$refs.wrapper.scrollHeight,this.$refs.wrapper.offsetHeight);
     },
   },
 };
@@ -69,7 +105,45 @@ export default {
   left: 0;
   height: 60vh;
   width: 100%;
-  padding-top: 20vh;
-  background: rgba(255, 0, 0, 0.5);
+  padding: 20vh 0 0;
+  overflow: hidden;
+  .box {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    display: flex;
+     justify-content: center;
+    align-content: center;
+    background-color: #a4c3c7;
+    background-color: hsla(185, 85%, 63%, 0.781);
+    .wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      padding: 10% 5% 10%;
+      width: 100%;
+      // background-color: pink;
+      transform: translateY(80px);
+      transition: all .5s;
+      li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        line-height: 30px;
+        .text {
+          width: 100%;
+          transition: all .8s;
+          &.active {
+            color: #b9300e;
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
 }
 </style>

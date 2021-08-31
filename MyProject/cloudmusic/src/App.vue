@@ -47,6 +47,7 @@
       @pause="playing = false"
       @timeupdate="timeUpdate"
       @durationchange="durationChange"
+      class="audio"
     ></audio>
 
     <Play
@@ -111,7 +112,6 @@ export default {
     },
     // 上一首
     prevSong() {
-      this.currentPlayList.findIndex((item) => {
         // console.log("上");
         var index = this.currentPlayList.findIndex((item) => {
           return item.id === this.currentSong.id;
@@ -122,7 +122,6 @@ export default {
         index = index <= 0 ? this.currentPlayList.length - 1 : index;
         // console.log(index);
         this.changeCurrentSong(this.currentPlayList[index]);
-      });
     },
     // 下一首
     nextSong() {
@@ -217,5 +216,13 @@ export default {
   left: 0;
   height: calc(100vh - 60px);
   // height: 100vh;
+}
+.audio{
+  position:absolute;
+  bottom: -10px;
+  left: 0;
+  z-index: 100000;
+  height: 50px;
+  
 }
 </style>

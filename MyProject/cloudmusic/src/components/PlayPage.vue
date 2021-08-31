@@ -41,13 +41,21 @@
             }?imageView=1&type=webp&thumbnail=246x0)`,
           }"
           class="thumb"
-          @click="showPlayLyric = true;"
+          @click="showPlayLyric = true"
         />
       </section>
     </section>
     <!-- <section class="play-lyric"></section> -->
-    <Lyric v-else @toggle-show-play-lyric="showPlayLyric = $event" :currentSong="currentSong">
-
+    <Lyric
+      v-else
+      @toggle-show-play-lyric="showPlayLyric = $event"
+      :currentSong="currentSong"
+      :playing="playing"
+      :currentTime="currentTime"
+      :durationTime="durationTime"
+      :currentPlayList="currentPlayList"
+      :lyric="lyric"
+    >
     </Lyric>
     <!-- 控件 -->
     <section class="controls">
@@ -71,16 +79,59 @@ export default {
     playing: Boolean,
     currentTime: Number,
     durationTime: Number,
-    currentPlayList: [],
+    currentPlayList: Array,
   },
-  data(){
+  data() {
     return {
-      showPlayLyric:false,
-    }
+      showPlayLyric: false,
+      lyric: [],
+    };
   },
   components: {
     Lyric,
   },
+  created() {
+    // 获取歌词
+    // this.getLyricData();
+  },
+  methods:{
+    getLyricData(id) {
+      // this.axios.get("http://apis.netstart.cn/music/lyric?id=1873049720").then(
+      this.axios
+        .get("http://apis.netstart.cn/music/lyric", {
+          params: {
+            id,
+          },
+        })
+        .then(
+          (res) => {
+            // console.log(res);
+            var lyric = res.data.lrc.lyric;
+            // console.log(lyric);
+            var arr = lyric
+              .split("\n")
+              .filter((s) => s)
+              .map((s) => {
+                var text = s.replace(/^\[\d{2}:\d{2}\.\d+\]/i, "");
+                var timeStr = s.replace(text, "").replace(/(^\[|\]$)/gi, "");
+                // console.log(timeStr);
+                var timeArr = timeStr.split(":").map((item) => Number(item));
+                var time = timeArr[0] * 60 + timeArr[1];
+                return { text, time };
+              });
+            // console.log(arr);
+            this.lyric = arr;
+          },
+          (err) => console.log(err)
+        );
+    },
+  },
+  watch:{
+    currentTime(){
+      this.getLyricData(this.currentSong.id);
+    }
+  }
+
 };
 </script>
 
