@@ -60,7 +60,10 @@
         <canvas height="40" width="40" ref="canvas"></canvas>
         <div class="icon" :class="[playing ? 'pause' : 'play']"></div>
       </div>
-      <button class="list-btn" @click.stop="$emit('toggle-show-play-list',true)">列表</button>
+      <!-- 列表 -->
+      <div class="list-btn " @click.stop="$emit('toggle-show-play-list',true)">
+        <!-- <img src="../assets/imgs/播放列表.png" alt=""> -->
+      </div>
     </section>
   <!-- </div> -->
 </template>
@@ -186,11 +189,13 @@ export default {
         // filter: brightness(120%);
       }
     }
-    button {
-      outline: none;
-      border: none;
-      border: 1px solid lightgray;
+    .list-btn {
+      border: 3px solid #ccc;
       margin: 0 5px;
+      width: 40px;
+      height: 40px;
+      // border-radius: 50%;
+      
     }
 
     // 环形进度条

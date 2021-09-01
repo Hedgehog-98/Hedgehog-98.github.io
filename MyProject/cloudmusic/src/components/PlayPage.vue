@@ -92,7 +92,7 @@ export default {
   },
   created() {
     // 获取歌词
-    // this.getLyricData();
+    this.getLyricData(this.currentSong.id);
   },
   methods:{
     getLyricData(id) {
@@ -224,6 +224,7 @@ export default {
     padding-top: 20vw;
     // width: 100%;
     // height: 60vh;
+    z-index: 0;
     background-color: rgba(255, 0, 0, 0.5);
   }
 }

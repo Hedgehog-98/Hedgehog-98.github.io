@@ -107,6 +107,7 @@ export default {
   width: 100%;
   padding: 20vh 0 0;
   overflow: hidden;
+  z-index: -1;
   .box {
     position: absolute;
     top: 0;
@@ -118,7 +119,7 @@ export default {
      justify-content: center;
     align-content: center;
     background-color: #a4c3c7;
-    background-color: hsla(185, 85%, 63%, 0.781);
+    background-color: #bbf3f8e5;
     .wrapper {
       position: absolute;
       top: 0;
