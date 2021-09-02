@@ -27,13 +27,15 @@
         enter-active-class="animate__animated animate__zoomIn"
         leave-active-class="animate__animated animate__fadeOut"
       >
-        <router-view
-          @change-current-song="changeCurrentSong"
-          @change-current-play-list="changeCurrentPlayList"
-          :currentSongId="currentSong ? currentSong.id : null"
-          :playing="playing"
-          class="router-view"
-        />
+        <keep-alive>
+          <router-view
+            @change-current-song="changeCurrentSong"
+            @change-current-play-list="changeCurrentPlayList"
+            :currentSongId="currentSong ? currentSong.id : null"
+            :playing="playing"
+            class="router-view"
+          />
+        </keep-alive>
       </transition>
     </section>
     <!-- 加了动画就不设高度或者display:none，没加动画要设高度 -->
@@ -82,6 +84,16 @@ export default {
     Header,
     Play,
   },
+  watch: {
+    currentTime(n) {
+      // console.log(n ,'-------',this.durationTime);
+      if (n === this.durationTime) {
+        console.log(this.currentSong.id);
+        this.nextSong(); //播放下一首歌
+        console.log(this.currentSong.id);
+      }
+    },
+  },
   computed: {
     currentSongUrl() {
       if (this.currentSong) {
@@ -112,16 +124,16 @@ export default {
     },
     // 上一首
     prevSong() {
-        // console.log("上");
-        var index = this.currentPlayList.findIndex((item) => {
-          return item.id === this.currentSong.id;
-        });
-        // console.log(index);
-        index--;
-        // 判断边界
-        index = index <= 0 ? this.currentPlayList.length - 1 : index;
-        // console.log(index);
-        this.changeCurrentSong(this.currentPlayList[index]);
+      // console.log("上");
+      var index = this.currentPlayList.findIndex((item) => {
+        return item.id === this.currentSong.id;
+      });
+      // console.log(index);
+      index--;
+      // 判断边界
+      index = index <= 0 ? this.currentPlayList.length - 1 : index;
+      // console.log(index);
+      this.changeCurrentSong(this.currentPlayList[index]);
     },
     // 下一首
     nextSong() {
@@ -158,14 +170,7 @@ export default {
 * {
   box-sizing: border-box;
 }
-.router-view {
-  position: absolute;
-  top: 0px;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow-y: auto;
-}
+
 // #app{
 //   width: 100vw;
 //   height: 100vh;
@@ -214,15 +219,21 @@ export default {
   position: relative;
   top: 0;
   left: 0;
-  height: calc(100vh - 60px);
-  // height: 100vh;
+  height: 100vh;
 }
-.audio{
-  position:absolute;
+.router-view {
+  position: absolute;
+  top: 0px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+.audio {
+  position: absolute;
   bottom: -10px;
   left: 0;
   z-index: 100000;
   height: 50px;
-  
 }
 </style>

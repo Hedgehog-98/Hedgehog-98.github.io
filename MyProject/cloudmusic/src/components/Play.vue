@@ -32,23 +32,25 @@
       leave-active-class="animate__animated animate__fadeOut"
     >
       <!-- 播放页面 -->
-      <PlayPage
-        v-show="showPlayPage"
-        @toggle-show-play-page="showPlayPage = $event"
-        @toggle-play-state="$emit('toggle-play-state')"
-        @toggle-show-play-list="showPlayList = $event"
-        @prev-song="$emit('prev-song')"
-        @next-song="$emit('next-song')"
-        @toggle-play-mode="$emit('toggle-play-mode')"
-        @change-current-song="$emit('change-current-song', $event)"
-        :currentSong="currentSong"
-        :currentTime="currentTime"
-        :durationTime="durationTime"
-        :currentPlayList="currentPlayList"
-        :playing="playing"
-        class="play-page"
-         
-      />
+      <keep-alive>
+        <PlayPage
+          v-show="showPlayPage"
+          @toggle-show-play-page="showPlayPage = $event"
+          @toggle-play-state="$emit('toggle-play-state')"
+          @toggle-show-play-list="showPlayList = $event"
+          @prev-song="$emit('prev-song')"
+          @next-song="$emit('next-song')"
+          @toggle-play-mode="$emit('toggle-play-mode')"
+          @change-current-song="$emit('change-current-song', $event)"
+          :currentSong="currentSong"
+          :currentSongId="currentSong.id"
+          :currentTime="currentTime"
+          :durationTime="durationTime"
+          :currentPlayList="currentPlayList"
+          :playing="playing"
+          class="play-page"
+        />
+      </keep-alive>
     </transition>
   </div>
 </template>
@@ -81,5 +83,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
 </style>>

@@ -48,24 +48,18 @@
     <!-- 搜索时显示 -->
     <section class="search search-result" v-if="searching">
       <h5>搜索结果</h5>
-      <ul>
-        <!-- <li v-for="item in searchResults" :key="item.id">
-          <div class="title"><span class="song-name">{{item.name}}</span> <span class="song-alias">{{item.alias[0]}}</span></div>
-          
-        </li> -->
-        <li v-for="(item, index) in searchResults" :key="index">
-          <div class="title">
-            {{ item.name }}
-            <span class="alias"> {{ item.alias[0] }}</span>
-          </div>
-          <div class="info">
-            <i></i>
-            <!-- 歌手名-->
-            <span class="artist"> {{ item.artists[0].name }}- </span>
-            <!-- 专辑名 -->
-            <em class="album">{{ item.album.name }}</em>
-          </div>
-        </li>
+      <!-- 最佳匹配 -->
+      <!--  歌手-->
+      <!-- 专辑 -->
+      <ul class="search-song-list">
+        <!-- 歌曲列表 -->
+        <SearchSongItem
+          v-for="(item,index) in searchResults"
+          :key="index"
+          :item="item"
+          :currentSongId="currentSongId"
+          :playing="playing"
+        ></SearchSongItem>
       </ul>
       <div class="bottom-box" v-if="!hasMore">
         <span class="no-more">没有更多了</span>
@@ -76,9 +70,18 @@
 </template>
 
 <script>
+import SearchSongItem from "@/components/SearchSongItem.vue";
 export default {
   name: "Search",
-  components: {},
+  components: {
+    SearchSongItem,
+  },
+  props: {
+    currentSongId: {
+      type: Number,
+    },
+    playing: Boolean,
+  },
   data() {
     return {
       hots: [],
@@ -138,16 +141,16 @@ export default {
             // 把audio 隐藏掉
             // document.querySelector("audio").style.display = "none";
             // if (res.data.result.songs) {
-              this.searchResults.push(...res.data.result.songs);
-              this.page++;
-              this.hasMore = res.data.result.hasMore;
+            this.searchResults.push(...res.data.result.songs);
+            this.page++;
+            this.hasMore = res.data.result.hasMore;
 
-              // 记录历史搜索记录
-              this.history = [...new Set([...this.history, this.value])];
-              window.localStorage.setItem(
-                "history",
-                JSON.stringify(this.history)
-              );
+            // 记录历史搜索记录
+            this.history = [...new Set([...this.history, this.value])];
+            window.localStorage.setItem(
+              "history",
+              JSON.stringify(this.history)
+            );
             // } else {
             //   return;
             // }
@@ -170,11 +173,13 @@ export default {
           console.log("触底了");
           this.getSearchResultsData();
         } else {
-          console.log(
-            "判断错误",
-            Math.ceil(event.target.offsetHeight + event.target.scrollTop),
-            event.target.scrollHeight
-          );
+          // console.log(
+          //   "判断错误",
+          //   Math.ceil(event.target.offsetHeight + event.target.scrollTop),
+          //   event.target.scrollHeight
+          // );
+          console.log('还没触底');
+          
         }
       }
       // else{
@@ -310,24 +315,9 @@ export default {
     }
     &.search-result {
       // height: 100vh ;
-      ul {
-        li {
-          // display: flex;
-          // height: 54px;
-          // line-height: 54px;
-          border-bottom: 1px solid #ccc;
-          .info {
-            i {
-              display: inline-block;
-              width: 20px;
-              height: 20px;
-              background: url("https://s3.music.126.net/mobile-new/img/index_icon_2x.png")
-                no-repeat;
-              background-size: 166px 97px;
-            }
-          }
-        }
-      }
+      // ul.search-song-list {
+      //   padding: 0 -5px;
+      // }
       .bottom-box {
         display: flex;
         justify-content: space-between;

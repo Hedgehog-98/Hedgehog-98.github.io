@@ -66,6 +66,7 @@ export default {
       // 下次dom更新完成之后再自动获取焦点
       this.$nextTick(() => {
         this.$refs.ipt.focus();
+        
       });
     },
   },

@@ -10,23 +10,25 @@
     ></div>
     <button @click="$emit('toggle-show-play-page', false)">play-page</button>
 
-    <!-- 播放主体  -->
-    <section class="music-box" v-if="!showPlayLyric">
-      <!-- 指针Pointer -->
-      <img
-        src="https://s3.music.126.net/mobile-new/img/needle-ab.png"
-        alt="指针"
-        class="pointer"
-        :class="{ paused: !playing }"
-      />
-      <section class="record" :class="{ playing: playing }">
-        <!-- 唱片disc -->
+    <!-- 主体内容 -->
+    <section>
+      <!-- 播放主体  -->
+      <section class="music-box" v-if="!showPlayLyric">
+        <!-- 指针Pointer -->
         <img
-          src="https://s3.music.126.net/mobile-new/img/disc.png"
-          class="disc"
+          src="https://s3.music.126.net/mobile-new/img/needle-ab.png"
+          alt="指针"
+          class="pointer"
+          :class="{ paused: !playing }"
         />
-        <!-- 缩略图 -->
-        <!-- <img
+        <section class="record" :class="{ playing: playing }">
+          <!-- 唱片disc -->
+          <img
+            src="https://s3.music.126.net/mobile-new/img/disc.png"
+            class="disc"
+          />
+          <!-- 缩略图 -->
+          <!-- <img
           :src="
             currentSong.song ? currentSong.picUrl : currentSong.al.picUrl
           "
@@ -34,36 +36,41 @@
           class="thumb"
           @click="$emit('toggle-play-state')"
         /> -->
-        <img
-          :style="{
-            backgroundImage: `url(${
-              currentSong.song ? currentSong.picUrl : currentSong.al.picUrl
-            }?imageView=1&type=webp&thumbnail=246x0)`,
-          }"
-          class="thumb"
-          @click="showPlayLyric = true"
-        />
+          <img
+            :style="{
+              backgroundImage: `url(${
+                currentSong.song ? currentSong.picUrl : currentSong.al.picUrl
+              }?imageView=1&type=webp&thumbnail=246x0)`,
+            }"
+            class="thumb"
+            @click="showPlayLyric = true"
+          />
+        </section>
       </section>
+      <!-- <section class="play-lyric"></section> -->
+      <Lyric
+        v-else
+        @toggle-show-play-lyric="showPlayLyric = $event"
+        :currentSong="currentSong"
+        :currentSongId="currentSongId"
+        :playing="playing"
+        :currentTime="currentTime"
+        :durationTime="durationTime"
+        :currentPlayList="currentPlayList"
+      >
+      </Lyric>
     </section>
-    <!-- <section class="play-lyric"></section> -->
-    <Lyric
-      v-else
-      @toggle-show-play-lyric="showPlayLyric = $event"
-      :currentSong="currentSong"
-      :playing="playing"
-      :currentTime="currentTime"
-      :durationTime="durationTime"
-      :currentPlayList="currentPlayList"
-      :lyric="lyric"
-    >
-    </Lyric>
     <!-- 控件 -->
     <section class="controls">
       <span class="mode" @click="$emit('toggle-play-mode')">模</span>
       <span class="prev" @click="$emit('prev-song')">上</span>
       <span class="play" @click="$emit('toggle-play-state')">播</span>
       <span class="next" @click="$emit('next-song')"> 下</span>
-      <span class="list" @click.stop="$emit('toggle-show-play-list', true)"
+      <span
+        class="list"
+        @click.stop="
+          $emit('toggle-show-play-list', true);
+        "
         >列</span
       >
     </section>
@@ -76,6 +83,7 @@ export default {
   name: "PlayPage",
   props: {
     currentSong: Object,
+    currentSongId: Number,
     playing: Boolean,
     currentTime: Number,
     durationTime: Number,
@@ -90,48 +98,6 @@ export default {
   components: {
     Lyric,
   },
-  created() {
-    // 获取歌词
-    this.getLyricData(this.currentSong.id);
-  },
-  methods:{
-    getLyricData(id) {
-      // this.axios.get("http://apis.netstart.cn/music/lyric?id=1873049720").then(
-      this.axios
-        .get("http://apis.netstart.cn/music/lyric", {
-          params: {
-            id,
-          },
-        })
-        .then(
-          (res) => {
-            // console.log(res);
-            var lyric = res.data.lrc.lyric;
-            // console.log(lyric);
-            var arr = lyric
-              .split("\n")
-              .filter((s) => s)
-              .map((s) => {
-                var text = s.replace(/^\[\d{2}:\d{2}\.\d+\]/i, "");
-                var timeStr = s.replace(text, "").replace(/(^\[|\]$)/gi, "");
-                // console.log(timeStr);
-                var timeArr = timeStr.split(":").map((item) => Number(item));
-                var time = timeArr[0] * 60 + timeArr[1];
-                return { text, time };
-              });
-            // console.log(arr);
-            this.lyric = arr;
-          },
-          (err) => console.log(err)
-        );
-    },
-  },
-  watch:{
-    currentTime(){
-      this.getLyricData(this.currentSong.id);
-    }
-  }
-
 };
 </script>
 
@@ -223,9 +189,11 @@ export default {
     position: relative;
     padding-top: 20vw;
     // width: 100%;
-    // height: 60vh;
+    height: 60vh;
     z-index: 0;
-    background-color: rgba(255, 0, 0, 0.5);
+    // background-color: rgba(0,0,0,.3);
+    // background-color: #fefeff96;
+    // border-radius: 45% 45% 5% 5%;
   }
 }
 </style>>

@@ -104,7 +104,7 @@ export default {
 // }
 .home{
   padding-top: 120px;
-  height: 120%;
+  height: calc(100% - 60px );
 }
 .home-card-list {  
   display: flex;

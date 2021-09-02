@@ -42,7 +42,7 @@
   </div> -->
   <!-- <div class="play-bar"> -->
     <section class="bar" :class="{ playing: playing }"  @click="$emit('toggle-show-play-page',true)">
-      <img
+      <img 
         :src="`${
           currentSong.song ? currentSong.picUrl : currentSong.al.picUrl
         }?imageView=1&type=webp&thumbnail=60x0`"
