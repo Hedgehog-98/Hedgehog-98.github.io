@@ -1,21 +1,4 @@
 <template>
-  <!-- <li class="song-item">
-    <div class="left">
-      <div class="title">
-        
-        <span class="alias"> {{ }}</span>
-      </div>
-      <div class="info">
-        <i></i>
-        <span class="artist">
-        </span>
-        <em class="album">{{}</em>
-      </div>
-    </div>
-    <div class="icon">
-      <div class="play"><i></i><i></i><i></i></div>
-    </div>
-  </li> -->
   <li class="new-song-item" @click="$emit('change-current-song', item)">
     <div class="num"><slot></slot></div>
     <div class="left">

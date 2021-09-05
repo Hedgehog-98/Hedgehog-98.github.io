@@ -64,6 +64,7 @@
       @prev-song="prevSong"
       @next-song="nextSong"
       @toggle-play-mode="togglePlayMode"
+      @current-time-change="$refs.audio.currentTime = $event"
     ></Play>
   </div>
 </template>
@@ -113,6 +114,12 @@ export default {
     changeCurrentPlayList(currentList) {
       this.currentPlayList = currentList;
     },
+    // 改变进度条时间即改变audio的播放时间
+    // currentTimeChange(event){
+    //   // console.log(event);
+    //   this.$refs.audio.currentTime = event;
+
+    // },
     togglePlayState() {
       if (this.playing) {
         // 暂停
@@ -231,9 +238,9 @@ export default {
 }
 .audio {
   position: absolute;
-  bottom: -10px;
+  bottom: 15px;
   left: 0;
-  z-index: 100000;
-  height: 50px;
+  // z-index: 100000;
+  // height: 50px;
 }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <li class="card-list-item" @click="goToPlayList(item.id)">
+  <li class="card-list-item" @click="goToRecommend(item.id)">
     <div class="pic-box">
       <img :src="`${item.picUrl}?imageView=1&type=webp&thumbnail=246x0`" />
       <span class="play-count">
@@ -26,8 +26,8 @@ export default {
     },
   },
   methods: {
-    goToPlayList(id) {
-      this.$router.push("/playList?id=" + id);
+    goToRecommend(id) {
+      this.$router.push("/recommend?id=" + id);
     },
   },
   filters: {

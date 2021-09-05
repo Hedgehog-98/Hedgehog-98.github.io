@@ -33,9 +33,9 @@ const routes = [
     component:() => import('../views/Search.vue'),
   },
   {
-    path:'/playList',
-    name:'PlayList',
-    component:() => import('../views/PlayList.vue'),
+    path:'/recommend',
+    name:'Recommend',
+    component:() => import('../views/Recommend.vue'),
   }
 ]
 

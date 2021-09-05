@@ -49,6 +49,7 @@
           :currentPlayList="currentPlayList"
           :playing="playing"
           class="play-page"
+          @current-time-change="$emit('current-time-change',$event)"
         />
       </keep-alive>
     </transition>

@@ -13,7 +13,7 @@
         :key="item.id"
         @change-current-song="
           $emit('change-current-song', $event);
-          $emit('change-current-play-list', tracks);
+          $emit('change-current-play-list',tracks)
         "
         :item="item"
         :currentSongId="currentSongId"
@@ -22,16 +22,32 @@
       >
         <span>{{ index + 1 }}</span>
       </HotSongItem>
+      <!-- <NewSongItem
+        v-for="(item, index) in tracks"
+        :key="item.id"
+        @change-current-song="
+          $emit('change-current-song', $event);
+          $emit('change-current-play-list', tracks);
+        "
+        :item="item"
+        :currentSongId="currentSongId"
+        :playing="playing"
+        :class="{ lt3: index < 3 }"
+      >
+        <span>{{ index + 1 }}</span>
+      </NewSongItem> -->
     </ul>
   </div>
 </template>
 
 <script>
 import HotSongItem from "@/components/HotSongItem.vue";
+// import NewSongItem from "@/components/NewSongItem";
 export default {
   name: "Hot",
   components: {
     HotSongItem,
+    // NewSongItem,
   },
   props: {
     currentSongId: {
@@ -45,7 +61,7 @@ export default {
       tracks: [],
     };
   },
-  
+
   computed: {
     formateUpdateTime() {
       var time = new Date(this.updateTime);
@@ -63,10 +79,10 @@ export default {
   methods: {
     getHotData() {
       this.axios
-        .get("    http://apis.netstart.cn/music/playlist/detail?id=3778678")
+        .get("http://apis.netstart.cn/music/playlist/detail?id=3778678")
         .then(
           (res) => {
-            // console.log(res);
+            console.log(res);
             this.updateTime = res.data.playlist.trackUpdateTime;
             this.tracks = res.data.playlist.tracks;
           },
@@ -78,8 +94,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+
 #hot {
   padding-top: 120px;
+  height: calc(100% - 60px );
+  overflow-y: auto;
   .hot-bg {
     position: relative;
     z-index: 1;

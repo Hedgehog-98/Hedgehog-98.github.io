@@ -1,25 +1,9 @@
 <template>
   <div class="play-list">
-    <!-- 头部区域 -->
-    <!-- <PlayListHead :detail="detail">
-   </PlayListHead> -->
-    <!-- 列表部分 -->
-    <!-- <div id="play-list-content" > -->
-    <!-- <div class="play-list-content" v-if="detail">
-      <h3 class="title">歌曲列表</h3>
-      <ul class="content">
-        <li v-for="item in detail.tracks" :key="item.id" class="item">
-          <div class="left">1</div>
-          <div class="song-info">
-            <div class="song-name">{{ item.name }}</div>
-            <div class="song-msg"></div>
-          </div>
-          <div class="right">图标</div>
-        </li>
-      </ul>
-    </div> -->
+  
+    <RecommendHead :detail="detail"></RecommendHead>
     <h3 class="title">歌曲列表</h3>
-    <NewSongItem
+    <NewSongItem 
       v-for="(item, index) in detail.tracks"
       :key="item.id"
       @change-current-song="$emit('change-current-song', $event)
@@ -28,6 +12,7 @@
       :currentSongId="currentSongId"
       :playing="playing"
       :class="{lt3 : index < 3}"
+      :style="{background:'#fefefe'}"
     >
       <span>{{ index + 1 }}</span>
     </NewSongItem>
@@ -36,12 +21,12 @@
 
 <script>
 import NewSongItem from "@/components/NewSongItem";
-// import PlayListHead from "@/components/PlayListHead";
+import RecommendHead from "@/components/RecommendHead.vue";
 export default {
-  name: "PlayList",
+  name: "Recommend",
   components: {
     NewSongItem,
-    // PlayListHead,
+    RecommendHead,
   },
   props: {
     currentSongId: {

@@ -1,18 +1,11 @@
 <template>
-  <div class="home" >
+  <div class="home" :class="{homep:true}" >
     <HomeTitle class="home-title">编辑推荐</HomeTitle>
     <ul class="home-card-list">
       <CartItem v-for="item in personalize" :key="item.id"
         :item="item"
        ></CartItem>
     </ul>
-    <!-- <ul class="personalize">
-      <li v-for="item in personalize" :key="item.id" class="personalize-item"
-      @click="goToPlayList(item.id)"
-      >
-        <span>{{ item.name }}</span>
-      </li>
-    </ul> -->
     <HomeTitle>最新音乐</HomeTitle>
     <div class="home-new-song-list">
       <NewSongItem v-for="item in songs" :key="item.id" :item='item'
@@ -106,6 +99,10 @@ export default {
   padding-top: 120px;
   height: calc(100% - 60px );
 }
+// .homep{
+//   height: calc(100% - 60px );
+
+// }
 .home-card-list {  
   display: flex;
   flex-wrap: wrap;

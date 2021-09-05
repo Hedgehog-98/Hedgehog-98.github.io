@@ -50,6 +50,7 @@
         </div>
       </li>
     </ul> -->
+    <!-- 最新音乐 -->
     <li
       v-if="item.song"
       class="new-song-item"
@@ -88,6 +89,7 @@
         </div>
       </div>
     </li>
+    <!-- 推荐歌单 -->
     <li
       v-else
       class="new-song-item song-list"

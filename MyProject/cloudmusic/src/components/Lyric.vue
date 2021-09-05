@@ -101,7 +101,8 @@ export default {
       // console.log(111);
       this.$nextTick(() => {
         if (this.$refs.wrapper) {
-          this.$refs.wrapper.style.marginTop = -this.ulMarginTop + "px";
+          // this.$refs.wrapper.style.marginTop = -this.ulMarginTop + "px";
+          this.$refs.wrapper.style.top = -this.ulMarginTop + "px";
         }
       });
     },
@@ -132,8 +133,29 @@ export default {
     background-color: #bbf3f8e5;
     background: rgba(0, 0, 0, 0);
     background-color: #fefeff96;
-    border-radius: 15px;
+    border-radius: 15px 0  0 15px;
     overflow-y: auto;
+    // 滚动条宽高和背景 宽高是横竖滚动条的尺寸
+    &::-webkit-scrollbar {
+      width: 5px;
+      height: 15px;
+      background-color: #ccc;
+    }
+    // 滚动条轨道，内阴影和圆角
+    &::-webkit-scrollbar-track {
+      border-radius: 3px;
+      // -webkit-box-shadow:inset 0 0  0 3px  rgb(14, 14, 197);
+      // background-color: skyblue;
+      background: linear-gradient(pink, skyblue, lightgreen);
+    }
+    // 定义滑块 内阴影和圆角
+    &::-webkit-scrollbar-thumb {
+      border-radius: 2px;
+      // -webkit-box-shadow:inset 0 0  0 3px  rgb(14, 197, 54);
+      // background-color: pink;
+      // background: linear-gradient(pink,skyblue);
+      background-color: tomato;
+    }
     .wrapper {
       position: absolute;
       top: 0;
@@ -148,11 +170,10 @@ export default {
         justify-content: center;
         align-items: center;
         text-align: center;
-        // line-height: 32px;
         line-height: 1.8;
         .text {
           width: 100%;
-          transition: all 0.8s;
+          transition: all 0.3s;
           color: #111;
           &.active {
             color: #b9300e;
