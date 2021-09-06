@@ -51,6 +51,7 @@ export default {
       return text.split("\n").slice(0, 3);
     },
   },
+
   methods: {
     getPlayListData(id) {
       this.axios
@@ -72,6 +73,13 @@ export default {
         );
     },
   },
+  // beforeRouteUpdate(to,from,next){
+  //   console.log(to.query.id);
+    
+  //   // this.getPlayListData(from.query.id);
+  //   next();
+  //   console.log(from.query.id);
+  // }
 };
 </script>
 

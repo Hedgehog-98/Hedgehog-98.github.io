@@ -11,7 +11,7 @@
         {{ item.playCount | calcCount }}
       </span>
     </div>
-    <p class="desc">{{ item.name }}</p>
+    <slot><p class="desc">{{ item.name }}</p></slot>
     <!-- {{item.id}} -->
   </li>
 </template>
