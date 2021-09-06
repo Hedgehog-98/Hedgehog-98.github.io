@@ -1,46 +1,21 @@
 <template>
-  
   <section
     class="bar"
     :class="{ playing: playing }"
     @click="$emit('toggle-show-play-page', true)"
   >
-    <!-- <img
-      :src="`${
-        currentSong.song ? currentSong.picUrl : currentSong.al.picUrl
-      }?imageView=1&type=webp&thumbnail=60x0`"
-      alt=""
-    /> -->
-    <img v-if="currentSong.song"
-      :src="`${
-        currentSong.picUrl
-      }?imageView=1&type=webp&thumbnail=60x0`"
-      alt=""
-    /><img v-else-if="currentSong.al"
-      :src="`${
-        currentSong.al.picUrl
-      }?imageView=1&type=webp&thumbnail=60x0`"
-      alt=""
-    /><img v-else-if="currentSong.artists"
+    <img
       :src="`${
         currentSong.artists[0].img1v1Url
       }?imageView=1&type=webp&thumbnail=60x0`"
       alt=""
     />
-
-    <div class="title animate__animated animate__slideInRight">
-      <h3>{{ currentSong.name }}</h3>
-      <!-- <span>{{
-          currentSong.song
-            ? currentSong.song.artists[0].name
-            : currentSong.ar[0].name
-        }}</span> -->
-      <span v-if="currentSong.song">{{
-        currentSong.song.artists[0].name
-      }}</span>
-      <span v-else-if="currentSong.al">{{ currentSong.ar[0].name }}</span>
-      <span v-else-if="currentSong.artists">{{ currentSong.artists[0].name }}</span>
-    </div>
+      <div class="title animate__animated animate__slideInRight">
+        <h3>{{ currentSong.name }}</h3>
+        <span>
+          {{currentSong.artists[0].name}}
+         </span>
+      </div>
     <div class="progress" @click.stop="$emit('toggle-play-state')">
       <canvas height="40" width="40" ref="canvas"></canvas>
       <div class="icon" :class="[playing ? 'pause' : 'play']"></div>
@@ -51,6 +26,8 @@
       @click.stop="$emit('toggle-show-play-list', true)"
     ></div>
   </section>
+    
+
 </template>
 
 <script>

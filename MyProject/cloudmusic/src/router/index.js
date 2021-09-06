@@ -35,6 +35,10 @@ const routes = [
   {
     path:'/recommend',
     name:'Recommend',
+    // 设置keepAlive为false
+    meta:{
+      keepAlive:false,
+    },
     component:() => import('../views/Recommend.vue'),
   }
 ]

@@ -1,7 +1,7 @@
 <template>
   <div class="play-lyric" @click="$emit('toggle-show-play-lyric', false)">
     <div class="box" ref="box">
-      <ul class="wrapper" ref="wrapper" v-show="lyric.length">
+      <ul class="wrapper" ref="wrapper" v-if="lyric.length ">
         <li v-for="(item, index) in lyric" :key="index" ref="li" class="li">
           <span class="text" :class="{ active: currentLyricIndex === index }">{{
             item.text
@@ -9,6 +9,10 @@
           <!-- <span>{{currentLyricIndex}}{{index}}</span> -->
         </li>
       </ul>
+      <div v-else class="cunyinyue">
+        纯音乐
+
+      </div>
     </div>
   </div>
 </template>
@@ -70,22 +74,26 @@ export default {
         })
         .then(
           (res) => {
-            // console.log(res);
-            var lyric = res.data.lrc.lyric;
-            // console.log(lyric);
-            var arr = lyric
-              .split("\n")
-              .filter((s) => s)
-              .map((s) => {
-                var text = s.replace(/^\[\d{2}:\d{2}\.\d+\]/i, "");
-                var timeStr = s.replace(text, "").replace(/(^\[|\]$)/gi, "");
-                // console.log(timeStr);
-                var timeArr = timeStr.split(":").map((item) => Number(item));
-                var time = timeArr[0] * 60 + timeArr[1];
-                return { text, time };
-              });
-            // console.log(arr);
-            this.lyric = arr;
+            console.log(res);
+            if (res.data.lrc) {
+              var lyric = res.data.lrc.lyric;
+              // console.log(lyric);
+              var arr = lyric
+                .split("\n")
+                .filter((s) => s)
+                .map((s) => {
+                  var text = s.replace(/^\[\d{2}:\d{2}\.\d+\]/i, "");
+                  var timeStr = s.replace(text, "").replace(/(^\[|\]$)/gi, "");
+                  // console.log(timeStr);
+                  var timeArr = timeStr.split(":").map((item) => Number(item));
+                  var time = timeArr[0] * 60 + timeArr[1];
+                  return { text, time };
+                });
+              // console.log(arr);
+              this.lyric = arr;
+            }else{
+              return;
+            }
           },
           (err) => console.log(err)
         );
@@ -117,7 +125,7 @@ export default {
   left: 0;
   height: 60vh;
   width: 100%;
-  padding: 20vh 0 0;
+  // padding: 20vh 0 0;
   overflow: hidden;
   z-index: -1;
   .box {
@@ -130,32 +138,9 @@ export default {
     display: flex;
     justify-content: center;
     align-content: center;
-    background-color: #bbf3f8e5;
-    background: rgba(0, 0, 0, 0);
-    background-color: #fefeff96;
-    border-radius: 15px 0  0 15px;
+    border-radius: 15px;
     overflow-y: auto;
-    // 滚动条宽高和背景 宽高是横竖滚动条的尺寸
-    &::-webkit-scrollbar {
-      width: 5px;
-      height: 15px;
-      background-color: #ccc;
-    }
-    // 滚动条轨道，内阴影和圆角
-    &::-webkit-scrollbar-track {
-      border-radius: 3px;
-      // -webkit-box-shadow:inset 0 0  0 3px  rgb(14, 14, 197);
-      // background-color: skyblue;
-      background: linear-gradient(pink, skyblue, lightgreen);
-    }
-    // 定义滑块 内阴影和圆角
-    &::-webkit-scrollbar-thumb {
-      border-radius: 2px;
-      // -webkit-box-shadow:inset 0 0  0 3px  rgb(14, 197, 54);
-      // background-color: pink;
-      // background: linear-gradient(pink,skyblue);
-      background-color: tomato;
-    }
+    // overflow: hidden;
     .wrapper {
       position: absolute;
       top: 0;
@@ -174,13 +159,19 @@ export default {
         .text {
           width: 100%;
           transition: all 0.3s;
-          color: #111;
+          // color: #111;
+          color: #fff;
           &.active {
             color: #b9300e;
             font-size: 20px;
           }
         }
       }
+    }
+    .cunyinyue{
+      font-size: 18px;
+     align-self: center;
+     color: #fff;
     }
   }
 }

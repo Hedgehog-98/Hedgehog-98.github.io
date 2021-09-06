@@ -91,7 +91,7 @@
     </li>
     <!-- 推荐歌单 -->
     <li
-      v-else
+      v-else-if="item.al"
       class="new-song-item song-list"
       @click="$emit('change-current-song', item)"
     >
@@ -107,6 +107,34 @@
             {{ artist.name }}
           </span>
           <em class="album">{{ item.al.name }}</em>
+        </div>
+      </div>
+      <div class="icon">
+        <div
+          class="play"
+          :class="{ current: currentSongId === item.id, playing: playing }"
+        >
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
+    </li>
+    <li
+      v-else-if="item.artists"
+      class="new-song-item song-list"
+      @click="$emit('change-current-song', item)"
+    >
+      <div class="num"><slot></slot></div>
+      <div class="left">
+        <div class="title">
+          {{ item.name }}
+          <span class="alias" v-for="a in item.alia" :key="a"> {{ a }}</span>
+        </div>
+        <div class="info">
+          <!-- <i v-if="item.song.exclusive"></i> -->
+          <span class="artist" v-for="artist in item.artists" :key="artist.id">
+            {{ artist.name }}
+          </span>
+          <em class="album">{{ item.album.name }}</em>
         </div>
       </div>
       <div class="icon">

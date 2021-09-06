@@ -84,7 +84,7 @@ export default {
           (res) => {
             console.log(res);
             this.updateTime = res.data.playlist.trackUpdateTime;
-            this.tracks = res.data.playlist.tracks;
+            this.tracks = res.data.playlist.tracks.slice(0,20);
           },
           (err) => console.log(err)
         );
@@ -97,7 +97,7 @@ export default {
 
 #hot {
   padding-top: 120px;
-  height: calc(100% - 60px );
+  // height: calc(100% - 60px );
   overflow-y: auto;
   .hot-bg {
     position: relative;
@@ -132,7 +132,7 @@ export default {
     .hot-time {
       margin-top: 10px;
       font-size: 12px;
-      color: #ffffcc;
+      color: #fff;
     }
   }
 }

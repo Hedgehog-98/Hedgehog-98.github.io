@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Header v-if="$route.meta.isShowNavBar" class="header"></Header>
-    <ul id="nav" v-if="$route.meta.isShowNavBar">
+    <ul id="nav" v-if="$route.meta.isShowNavBar" >
       <li><router-link to="/">推荐音乐</router-link></li>
       <li><router-link to="/hot">热歌榜</router-link></li>
       <li><router-link to="/search">搜索</router-link></li>
@@ -27,13 +27,14 @@
         enter-active-class="animate__animated animate__zoomIn"
         leave-active-class="animate__animated animate__fadeOut"
       >
-        <keep-alive>
+        <keep-alive >
           <router-view
             @change-current-song="changeCurrentSong"
             @change-current-play-list="changeCurrentPlayList"
             :currentSongId="currentSong ? currentSong.id : null"
             :playing="playing"
             class="router-view"
+            :class="{'router-view-active':isShowPlayBar}"
           />
         </keep-alive>
       </transition>
@@ -79,6 +80,7 @@ export default {
       currentTime: 0,
       durationTime: 0,
       currentPlayList: [],
+      isShowPlayBar:false,
     };
   },
   components: {
@@ -108,7 +110,8 @@ export default {
     changeCurrentSong(song) {
       // console.log(song);
       this.currentSong = song;
-      // console.log(11);
+      // 显示底部playBar
+        this.isShowPlayBar = true;
     },
     // 改变当前歌曲的播放列表
     changeCurrentPlayList(currentList) {
@@ -127,6 +130,7 @@ export default {
       } else {
         // 播放
         this.$refs.audio.play();
+        
       }
     },
     // 上一首
@@ -235,6 +239,9 @@ export default {
   width: 100%;
   height: 100%;
   overflow-y: auto;
+}
+.router-view-active{
+  height: calc(100% - 60px);
 }
 .audio {
   position: absolute;

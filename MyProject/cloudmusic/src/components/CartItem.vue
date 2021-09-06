@@ -11,7 +11,7 @@
         {{ item.playCount | calcCount }}
       </span>
     </div>
-    <slot><p class="desc">{{ item.name }}</p></slot>
+    <slot class="te"></slot>
     <!-- {{item.id}} -->
   </li>
 </template>
@@ -30,6 +30,7 @@ export default {
       this.$router.push("/recommend?id=" + id);
     },
   },
+ 
   filters: {
     calcCount(value) {
       if (value > 100000000) {
@@ -55,9 +56,8 @@ export default {
   }
   .pic-box {
     position: relative;
-    // img {
-    //   // vertical-align: middle;
-    // }
+    height: 123px;
+    box-shadow: 0 1px 3px 0 rgba(0,0,0) inset;
     span.play-count {
       position: absolute;
       top: 3px;

@@ -1,14 +1,38 @@
 <template>
   <section class="play-page">
-    <div
+    <!-- <div
       class="mask"
       :style="{
         backgroundImage: `url(${
-          currentSong.song ? currentSong.picUrl : currentSong.al.picUrl
+          currentSong.song ? currentSong.picUrl : currentSong.al.picUrl 
         }?imageView=1&type=webp&thumbnail=246x0)`,
       }"
+    ></div> -->
+    <div
+      class="mask"
+      v-if="currentSong.song"
+      :style="{
+        backgroundImage: `url(${currentSong.picUrl}?imageView=1&type=webp&thumbnail=246x0)`,
+      }"
     ></div>
-    <button @click="$emit('toggle-show-play-page', false)" class="back-btn"></button>
+    <div
+      v-else-if="currentSong.al"
+      class="mask"
+      :style="{
+        backgroundImage: `url(${currentSong.al.picUrl}?imageView=1&type=webp&thumbnail=246x0)`,
+      }"
+    ></div>
+    <div
+      v-else-if="currentSong.artists"
+      class="mask"
+      :style="{
+        backgroundImage: `url(${currentSong.artists[0].img1v1Url}?imageView=1&type=webp&thumbnail=246x0)`,
+      }"
+    ></div>
+    <button
+      @click="$emit('toggle-show-play-page', false)"
+      class="back-btn"
+    ></button>
 
     <!-- 主体内容 -->
     <section class="center-content">
@@ -27,7 +51,7 @@
             src="https://s3.music.126.net/mobile-new/img/disc.png"
             class="disc"
           />
-          <img
+          <!-- <img
             :style="{
               backgroundImage: `url(${
                 currentSong.song ? currentSong.picUrl : currentSong.al.picUrl
@@ -35,9 +59,38 @@
             }"
             class="thumb"
             @click="showPlayLyric = true"
+          /> -->
+          <img
+            v-if="currentSong.song"
+            :style="{
+              backgroundImage: `url(${currentSong.picUrl}?imageView=1&type=webp&thumbnail=246x0)`,
+            }"
+            class="thumb"
+            @click="showPlayLyric = true"
           />
-          <img v-if="!playing" src="../assets/imgs/播放-big.png" alt="" class="play-btn" @click="$emit('toggle-play-state')" >
-          
+          <img
+            v-else-if="currentSong.al"
+            :style="{
+              backgroundImage: `url(${currentSong.al.picUrl}?imageView=1&type=webp&thumbnail=246x0)`,
+            }"
+            class="thumb"
+            @click="showPlayLyric = true"
+          />
+          <img
+            v-else-if="currentSong.artists"
+            :style="{
+              backgroundImage: `url(${currentSong.artists[0].img1v1Url}?imageView=1&type=webp&thumbnail=246x0)`,
+            }"
+            class="thumb"
+            @click="showPlayLyric = true"
+          />
+          <img
+            v-if="!playing"
+            src="../assets/imgs/播放-big.png"
+            alt=""
+            class="play-btn"
+            @click="$emit('toggle-play-state')"
+          />
         </section>
       </section>
       <!-- <section class="play-lyric"></section> -->
@@ -171,20 +224,20 @@ export default {
     left: 0;
     width: 100%;
     height: 100%;
-    filter: blur(30px) brightness(0.8);
+    filter: blur(40px) brightness(0.5);
     z-index: -1;
     transform: scale(1.5);
     overflow: hidden;
     background-position: center center;
     background-size: cover;
   }
-  .back-btn{
+  .back-btn {
     width: 40px;
     height: 32px;
     outline: none;
     border: none;
     display: block;
-    background-image: url('../assets/imgs/左箭头.png');
+    background-image: url("../assets/imgs/左箭头.png");
     background-repeat: no-repeat;
     background-color: rgb(202, 188, 188);
     border-radius: 0 10px 10px 0;
@@ -225,7 +278,7 @@ export default {
           &.thumb {
             transform: scale(0.6);
           }
-          &.play-btn{
+          &.play-btn {
             position: absolute;
             top: 50%;
             left: 50%;
@@ -288,7 +341,7 @@ export default {
       display: flex;
       justify-content: space-around;
       color: #fff;
-      background:linear-gradient(45deg,rgb(75, 63, 63),rgb(211, 202, 202));
+      background: linear-gradient(45deg, rgb(75, 63, 63), rgb(211, 202, 202));
       border-radius: 25px;
       span {
         display: inline-block;
@@ -335,9 +388,6 @@ export default {
     // width: 100%;
     height: 60vh;
     z-index: 0;
-    // background-color: rgba(0,0,0,.3);
-    // background-color: #fefeff96;
-    // border-radius: 45% 45% 5% 5%;
   }
 }
 </style>>

@@ -52,7 +52,8 @@ export default {
   methods: {
     searchSongClick() {
       console.log(111);
-      this.$emit("search-li-click");
+      // this.$emit("search-li-click");
+      this.$emit('change-current-song',this.item);
     },
   },
 };

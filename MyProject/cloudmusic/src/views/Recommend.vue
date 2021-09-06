@@ -1,18 +1,20 @@
 <template>
-  <div class="play-list">
-  
-    <RecommendHead :detail="detail"></RecommendHead>
+  <div class="play-list" v-if="detail">
+    <RecommendHead :detail="detail" class="recommend-head"></RecommendHead>
+
     <h3 class="title">歌曲列表</h3>
-    <NewSongItem 
+    <NewSongItem
       v-for="(item, index) in detail.tracks"
       :key="item.id"
-      @change-current-song="$emit('change-current-song', $event)
-      $emit('change-current-play-list',detail.tracks)"
+      @change-current-song="
+        $emit('change-current-song', $event);
+        $emit('change-current-play-list', detail.tracks);
+      "
       :item="item"
       :currentSongId="currentSongId"
       :playing="playing"
-      :class="{lt3 : index < 3}"
-      :style="{background:'#fefefe'}"
+      :class="{ lt3: index < 3 }"
+      :style="{ background: '#fefefe' }"
     >
       <span>{{ index + 1 }}</span>
     </NewSongItem>
@@ -51,7 +53,6 @@ export default {
       return text.split("\n").slice(0, 3);
     },
   },
-
   methods: {
     getPlayListData(id) {
       this.axios
@@ -65,7 +66,7 @@ export default {
           (res) => {
             // console.log(res);
             this.detail = res.data.playlist;
-            console.log(this.detail);
+            // console.log(this.detail);
           },
           (err) => {
             console.log(err);
@@ -73,20 +74,23 @@ export default {
         );
     },
   },
-  // beforeRouteUpdate(to,from,next){
-  //   console.log(to.query.id);
-    
-  //   // this.getPlayListData(from.query.id);
-  //   next();
-  //   console.log(from.query.id);
-  // }
+  watch: {
+    $route(to) {
+      // 变化 就重新请求
+      this.detail = this.getPlayListData(to.query.id);
+    },
+  },
 };
 </script>
 
 <style lang="less" scoped>
 // .play-list {
-//   // padding: 0 10px;
-//   // top:120px;
+//   // padding-top: 185px;
+// }
+// .recommend-head{
+//   position: fixed;
+//   top: 0px;
+//   left: 0;
 // }
 // 列表内容标题
 h3.title {

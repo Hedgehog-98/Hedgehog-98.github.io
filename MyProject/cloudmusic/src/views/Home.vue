@@ -1,5 +1,5 @@
 <template>
-  <div class="home" :class="{homep:true}" >
+  <div class="home"  >
     <HomeTitle class="home-title">编辑推荐</HomeTitle>
     <ul class="home-card-list">
       <CartItem v-for="item in personalize" :key="item.id"
@@ -97,7 +97,7 @@ export default {
 // }
 .home{
   padding-top: 120px;
-  height: calc(100% - 60px );
+  // height: calc(100% - 60px );
 }
 // .homep{
 //   height: calc(100% - 60px );

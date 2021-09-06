@@ -17,6 +17,19 @@
         @toggle-show-play-list="showPlayList = $event"
         @toggle-show-play-page="showPlayPage = $event"
       />
+      <!-- <SearchPlayBar
+        v-else
+        class="play-bar"
+        v-show="!showPlayPage"
+        :currentPlayList="currentPlayList"
+        :currentSong="currentSong"
+        :currentTime="currentTime"
+        :durationTime="durationTime"
+        :playing="playing"
+        @toggle-play-state="$emit('toggle-play-state')"
+        @toggle-show-play-list="showPlayList = $event"
+        @toggle-show-play-page="showPlayPage = $event"
+      /> -->
     </transition>
     <PlayList
       v-if="showPlayList"
@@ -49,7 +62,7 @@
           :currentPlayList="currentPlayList"
           :playing="playing"
           class="play-page"
-          @current-time-change="$emit('current-time-change',$event)"
+          @current-time-change="$emit('current-time-change', $event)"
         />
       </keep-alive>
     </transition>
@@ -58,12 +71,14 @@
 
 <script>
 import PlayBar from "@/components/PlayBar";
+// import SearchPlayBar from "@/components/SearchPlayBar";
 import PlayPage from "@/components/PlayPage";
 import PlayList from "@/components/PlayList";
 export default {
   name: "Play",
   components: {
     PlayBar,
+    // SearchPlayBar,
     PlayPage,
     PlayList,
   },

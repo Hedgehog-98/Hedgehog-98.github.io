@@ -87,6 +87,8 @@
           :item="item"
           :currentSongId="currentSongId"
           :playing="playing"
+          @change-current-song="$emit('change-current-song',item);$emit('change-current-play-list',searchResults)"
+          
         ></SearchSongItem>
       </ul>
       <div class="bottom-box" v-if="!hasMore">
@@ -331,7 +333,7 @@ export default {
     // padding: 15px 10px 0;
     &.hot-search {
       // overflow: hidden;
-      h5{
+      h5 {
         margin: 20px 15px 0;
         font-size: 12px;
       }
@@ -392,11 +394,12 @@ export default {
       h3 {
         display: flex;
         padding: 5px 4px;
-        margin: 0 10px 10px;
+        margin: 0 10px 5px;
         border-radius: 8px 8px 5px 5px;
         color: #777;
-        box-shadow: 0px -1px 2px 0px rgba(30, 30, 30, 0.5) inset;
-        font-size: 14px;
+        // box-shadow: 0px -1px 2px 0px rgba(30, 30, 30, 0.5) inset;
+        font-size: 16px;
+        font-weight: 600;
         div {
           flex: 1;
         }
@@ -420,7 +423,7 @@ export default {
     &.search-suggest {
       padding: 0;
       h5 {
-        margin:15px 0 0  10px;
+        margin: 15px 0 0 10px;
         padding-right: 10px;
         color: #507daf;
         font-size: 15px;
