@@ -43,9 +43,11 @@
         <li v-for="(h, index) in history" :key="index">
           <span class="h-icon"></span>
           <div class="right">
-            <span class="text">{{ h }}</span>
+            <span class="text" @click="searching = true;value = h;">{{ h }}</span>
             <span class="del" @click="deleteHistory(index)"></span>
-          </div>
+          </div>  
+
+          
         </li>
       </ul>
       <p v-else style="padding: 12px; color: #999">暂时还没有历史记录...</p>

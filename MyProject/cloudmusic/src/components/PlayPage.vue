@@ -94,7 +94,7 @@
         </section>
       </section>
       <!-- <section class="play-lyric"></section> -->
-      <Lyric
+      <!-- <Lyric
         v-else
         @toggle-show-play-lyric="showPlayLyric = $event"
         :currentSong="currentSong"
@@ -104,7 +104,18 @@
         :durationTime="durationTime"
         :currentPlayList="currentPlayList"
       >
-      </Lyric>
+      </Lyric> -->
+      <PlayLyric
+        v-else
+        @toggle-show-play-lyric="showPlayLyric = $event"
+        :currentSong="currentSong"
+        :currentSongId="currentSongId"
+        :playing="playing"
+        :currentTime="currentTime"
+        :durationTime="durationTime"
+        :currentPlayList="currentPlayList"
+      >
+      </PlayLyric>
     </section>
 
     <!-- 进度条 -->
@@ -121,6 +132,10 @@
         class="handle-ipt"
         :style="{ width: (value / durationTime) * 100 + '%' }"
       ></span>
+    </section>
+    <section class="time">
+      <span class="current">{{ formatTime(currentTime) }}</span>
+      <span class="duration">{{ formatTime(durationTime) }}</span>
     </section>
 
     <!-- 控件 -->
@@ -144,7 +159,8 @@
 </template>
 
 <script>
-import Lyric from "@/components/Lyric.vue";
+// import Lyric from "@/components/Lyric.vue";
+import PlayLyric from "@/components/PlayLyric.vue";
 export default {
   name: "PlayPage",
   props: {
@@ -163,7 +179,8 @@ export default {
     };
   },
   components: {
-    Lyric,
+    // Lyric,
+    PlayLyric,
   },
   watch: {
     currentTime(n) {
@@ -178,9 +195,22 @@ export default {
       this.inputing = false;
       // console.log(event.target.value);
       this.$emit("current-time-change", event.target.value);
+      // this.$emit("toggle-play-state");
     },
     progressInput() {
       this.inputing = true;
+    },
+    // 格式化时间
+    formatTime(time) {
+      // 向下取整,相当于Math.floor()
+      time |= 0;
+      // 获取分的部分
+      const m = (time / 60) | 0;
+      // 获取秒的部分
+      const s = time % 60;
+      return `${m.toString().padStart(2, "0")}:${s
+        .toString()
+        .padStart(2, "0")}`;
     },
   },
 };
@@ -254,7 +284,7 @@ export default {
         left: 46%;
         height: 36vw;
         z-index: 9;
-        transform: rotate(-3deg);
+        transform: rotate(-0deg);
         transform-origin: 15px 15px;
         transition: all 0.5s;
         &.paused {
@@ -334,6 +364,15 @@ export default {
         border-radius: 50%;
       }
     }
+  }
+  // time
+  .time {
+    color: #fff;
+    font-size: 12px;
+    width: 88vw;
+    margin: 5px auto 0;
+    display: flex;
+    justify-content: space-between;
   }
   .controls {
     padding: 10% 8%;

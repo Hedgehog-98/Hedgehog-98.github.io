@@ -1,18 +1,21 @@
 <template>
   <div class="play-lyric" @click="$emit('toggle-show-play-lyric', false)">
     <div class="box" ref="box">
-      <ul class="wrapper" ref="wrapper" v-if="lyric.length ">
+      <ul class="wrapper" ref="wrapper" v-if="lyric.length">
         <li v-for="(item, index) in lyric" :key="index" ref="li" class="li">
-          <span class="text" :class="{ active: currentLyricIndex === index }">{{
-            item.text
-          }}</span>
+          <span
+            class="text"
+           
+            :class="{
+              active: currentLyricIndex === index
+              
+            }"
+            >{{ item.text }}</span
+          >
           <!-- <span>{{currentLyricIndex}}{{index}}</span> -->
         </li>
       </ul>
-      <div v-else class="cunyinyue">
-        纯音乐
-
-      </div>
+      <div v-else class="cunyinyue">纯音乐</div>
     </div>
   </div>
 </template>
@@ -91,7 +94,7 @@ export default {
                 });
               // console.log(arr);
               this.lyric = arr;
-            }else{
+            } else {
               return;
             }
           },
@@ -119,6 +122,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
+@keyframes lyric {
+  from {
+    background-position-x: 0;
+  }
+  to {
+    background-position-x: -100%;
+  }
+}
 .play-lyric {
   position: absolute;
   top: 20px;
@@ -165,13 +176,14 @@ export default {
             color: #b9300e;
             font-size: 20px;
           }
+          
         }
       }
     }
-    .cunyinyue{
+    .cunyinyue {
       font-size: 18px;
-     align-self: center;
-     color: #fff;
+      align-self: center;
+      color: #fff;
     }
   }
 }
