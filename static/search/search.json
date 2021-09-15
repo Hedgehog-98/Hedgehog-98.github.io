@@ -1,0 +1,75 @@
+{
+    "hotWord": {
+        "data": [
+            {
+                "color": "",
+                "query": "衬衫",
+                "acm": "3.mce.1_10_11k.37705.28553.u7v17sIX739IG.p_3_hotSearchKeywordRec-mid_37705-sd_115-mdt_hotWord-dit_-lc_201",
+                "frontword": "衬衫"
+            },
+            {
+                "color": "",
+                "query": "睡衣",
+                "acm": "3.mce.1_10_11k.37705.28553.u7v17sIX739IG.p_3_hotSearchKeywordRec-mid_37705-sd_115-mdt_hotWord-dit_-lc_201",
+                "frontword": "睡衣"
+            },
+            {
+                "color": "#ff4466",
+                "query": "连衣裙",
+                "acm": "3.mce.1_10_11k.37705.28553.u7v17sIX739IG.p_3_hotSearchKeywordRec-mid_37705-sd_115-mdt_hotWord-dit_-lc_201",
+                "frontword": "连衣裙"
+            },
+            {
+                "color": "#ff4466",
+                "query": "裙子",
+                "acm": "3.mce.1_10_11k.37705.28553.u7v17sIX739IG.p_3_hotSearchKeywordRec-mid_37705-sd_115-mdt_hotWord-dit_-lc_201",
+                "frontword": "裙子"
+            },
+            {
+                "color": "",
+                "query": "内衣",
+                "acm": "3.mce.1_10_11k.37705.28553.u7v17sIX739IG.p_3_hotSearchKeywordRec-mid_37705-sd_115-mdt_hotWord-dit_-lc_201",
+                "frontword": "内衣"
+            },
+            {
+                "color": "",
+                "query": "包包",
+                "acm": "3.mce.1_10_11k.37705.28553.u7v17sIX739IG.p_3_hotSearchKeywordRec-mid_37705-sd_115-mdt_hotWord-dit_-lc_201",
+                "frontword": "包包"
+            },
+            {
+                "color": "",
+                "query": "卫衣",
+                "acm": "3.mce.1_10_11k.37705.28553.u7v17sIX739IG.p_3_hotSearchKeywordRec-mid_37705-sd_115-mdt_hotWord-dit_-lc_201",
+                "frontword": "卫衣"
+            },
+            {
+                "color": "",
+                "query": "短袖",
+                "acm": "3.mce.1_10_11k.37705.28553.u7v17sIX739IG.p_3_hotSearchKeywordRec-mid_37705-sd_115-mdt_hotWord-dit_-lc_201",
+                "frontword": "短袖"
+            },
+            {
+                "color": "",
+                "query": "背带裤",
+                "acm": "3.mce.1_10_11k.37705.28553.u7v17sIX739IG.p_3_hotSearchKeywordRec-mid_37705-sd_115-mdt_hotWord-dit_-lc_201",
+                "frontword": "背带裤"
+            },
+            {
+                "color": "#ff4466",
+                "query": "外套",
+                "acm": "3.mce.1_10_11k.37705.28553.u7v17sIX739IG.p_3_hotSearchKeywordRec-mid_37705-sd_115-mdt_hotWord-dit_-lc_201",
+                "frontword": "外套"
+            }
+        ],
+        "success": true
+    },
+    "sketch": {
+        "data": {
+            "query": "时尚套装",
+            "acm": "3.mce.1_10_1uwhk.1088.0.uXJuTsIX72lJB.sd_119-mdt_sketch-pos_2-m_720864-dit_",
+            "frontword": "学院风jk套装"
+        },
+        "success": true
+    }
+}
